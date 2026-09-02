@@ -1,0 +1,2940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShilpSetu — Your craft. Your digital business.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js">
+    </script>
+    <style>
+        :root {
+            --ink: #241C14;
+            --ink-soft: #5A4F41;
+            --paper: #FBF4E6;
+            --paper-warm: #F3E7CE;
+            --card: #FFFDF8;
+            --line: #E7D9B8;
+            --bamboo: #2E4A34;
+            --bamboo-deep: #1D3024;
+            --clay: #B5502E;
+            --clay-deep: #8E3B21;
+            --gold: #E3A63E;
+            --teal: #2F6F62;
+            --ok: #3E7D4C;
+            --shadow: 0 18px 40px -20px rgba(36, 28, 20, 0.35);
+        }
+        * {
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background:
+                radial-gradient(1200px 600px at 12% -10%, #F6E9CC 0%, transparent 60%),
+                radial-gradient(1000px 700px at 100% 10%, #EFDCB1 0%, transparent 55%),
+                var(--paper);
+            font-family: 'Manrope', sans-serif;
+            color: var(--ink);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1,
+        h2,
+        h3,
+        .serif {
+            font-family: 'Fraunces', serif;
+        }
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+        ::selection {
+            background: var(--gold);
+            color: var(--ink);
+        }
+
+        .stage {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px 16px;
+            gap: 40px;
+        }
+        .stage-side {
+            display: none;
+        }
+        @media(min-width:1040px) {
+            .stage-side {
+                display: flex;
+                flex-direction: column;
+                gap: 18px;
+                width: 300px;
+            }
+        }
+        .brandmark {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .brandmark .logo {
+            width: 46px;
+            height: 46px;
+            border-radius: 13px;
+            background: linear-gradient(155deg, var(--bamboo) 0%, var(--bamboo-deep) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+        .side-note {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: var(--ink-soft);
+            border-left: 2px solid var(--line);
+            padding-left: 16px;
+        }
+        .side-quote {
+            font-family: 'Fraunces', serif;
+            font-size: 22px;
+            font-style: italic;
+            color: var(--bamboo-deep);
+            line-height: 1.35;
+        }
+
+        .phone {
+            width: 390px;
+            max-width: 100%;
+            height: 820px;
+            max-height: 92vh;
+            background: var(--card);
+            border-radius: 44px;
+            border: 10px solid var(--ink);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 26px;
+            background: var(--ink);
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            z-index: 50;
+        }
+        .statusbar {
+            height: 44px;
+            flex: 0 0 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 26px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--ink);
+        }
+        .screen {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+            scrollbar-width: none;
+        }
+        .screen::-webkit-scrollbar {
+            display: none;
+        }
+        .screen-inner {
+            padding: 22px 22px 30px;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11.5px;
+            font-weight: 700;
+            letter-spacing: .02em;
+            color: var(--bamboo-deep);
+            background: #E7EFDF;
+            border: 1px solid #CFE0C4;
+            padding: 5px 11px;
+            border-radius: 99px;
+            width: fit-content;
+        }
+        .tag.ai {
+            background: #FBEFD9;
+            border-color: #EED9A6;
+            color: #8A5A12;
+        }
+        .tag.live {
+            background: #FDE7E1;
+            border-color: #F3C3B4;
+            color: #B5502E;
+        }
+
+        .btn-primary {
+            background: var(--bamboo);
+            color: #fff;
+            border: none;
+            padding: 16px 22px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 16px;
+            width: 100%;
+            box-shadow: 0 10px 22px -8px rgba(29, 48, 36, .55);
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
+        .btn-primary:active {
+            transform: scale(.98);
+        }
+        .btn-primary:disabled {
+            opacity: .45;
+            box-shadow: none;
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--bamboo-deep);
+            border: 1.5px solid var(--line);
+            padding: 15px 22px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 15.5px;
+            width: 100%;
+        }
+        .btn-clay {
+            background: var(--clay);
+            color: #fff;
+            border: none;
+            padding: 16px 22px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 16px;
+            width: 100%;
+            box-shadow: 0 10px 22px -8px rgba(142, 59, 33, .55);
+        }
+        .btn-ghost {
+            background: transparent;
+            border: none;
+            color: var(--ink-soft);
+            font-weight: 700;
+            font-size: 14.5px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 18px;
+        }
+        .field-label {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: var(--ink-soft);
+            margin-bottom: 6px;
+            letter-spacing: .01em;
+        }
+
+        .mic-btn {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, var(--clay) 0%, var(--clay-deep) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            box-shadow: 0 14px 30px -10px rgba(142, 59, 33, .6);
+            position: relative;
+        }
+        .mic-pulse {
+            position: absolute;
+            inset: -14px;
+            border-radius: 50%;
+            border: 2px solid rgba(181, 80, 46, .45);
+            animation: pulse 1.6s ease-out infinite;
+        }
+        .mic-pulse.p2 {
+            animation-delay: .5s;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(.85);
+                opacity: .9;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        .wave {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            height: 44px;
+            justify-content: center;
+        }
+        .wave span {
+            width: 4px;
+            border-radius: 3px;
+            background: var(--clay);
+            animation: wv .9s ease-in-out infinite;
+        }
+        @keyframes wv {
+            0%,
+            100% {
+                height: 8px;
+            }
+            50% {
+                height: 38px;
+            }
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 0;
+            font-size: 14.5px;
+            color: var(--ink-soft);
+            opacity: 0;
+            transform: translateY(6px);
+            animation: riseIn .4s ease forwards;
+        }
+        @keyframes riseIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .check-dot {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--ok);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 22px;
+        }
+        .check-dot.pending {
+            background: #EDE3C8;
+        }
+
+        .progressdots {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 14px;
+        }
+        .progressdots span {
+            height: 4px;
+            flex: 1;
+            border-radius: 3px;
+            background: var(--line);
+        }
+        .progressdots span.on {
+            background: var(--bamboo);
+        }
+
+        .bottomnav {
+            flex: 0 0 74px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border-top: 1px solid var(--line);
+            background: var(--card);
+        }
+        .navitem {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--ink-soft);
+            background: none;
+            border: none;
+        }
+        .navitem.active {
+            color: var(--bamboo-deep);
+        }
+
+        .slider-wrap {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+        }
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, .6);
+        }
+        .slider-grip {
+            position: absolute;
+            top: 50%;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #fff;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .25);
+        }
+
+        .fade-in {
+            animation: fadeIn .45s ease both;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .flash {
+            position: absolute;
+            inset: 0;
+            background: #fff;
+            animation: flashOut .35s ease forwards;
+        }
+        @keyframes flashOut {
+            0% {
+                opacity: .9;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .chip {
+            background: var(--paper-warm);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 10px 12px;
+            font-size: 13.5px;
+        }
+
+        input[type=text],
+        input[type=number],
+        textarea {
+            width: 100%;
+            border: 1.5px solid var(--line);
+            border-radius: 14px;
+            padding: 13px 14px;
+            font-family: inherit;
+            font-size: 15px;
+            background: #fff;
+            color: var(--ink);
+        }
+        input:focus,
+        textarea:focus {
+            outline: 2px solid var(--gold);
+            outline-offset: 1px;
+        }
+
+        .match-ring {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 13px;
+            color: #fff;
+            flex: 0 0 54px;
+        }
+
+        .toast {
+            position: absolute;
+            left: 22px;
+            right: 22px;
+            bottom: 96px;
+            background: var(--ink);
+            color: #fff;
+            padding: 13px 16px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow);
+            animation: fadeIn .3s ease both;
+            z-index: 60;
+        }
+
+        .edit-input {
+            border-color: var(--gold);
+            background: #FFFDF5;
+        }
+        .edit-input:focus {
+            outline: 2px solid var(--gold);
+        }
+
+        .editable-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 9px 0;
+            border-top: 1px solid var(--line);
+            align-items: center;
+        }
+        .editable-row:first-child {
+            border-top: none;
+        }
+        .editable-row .label {
+            font-size: 13px;
+            color: var(--ink-soft);
+            font-weight: 700;
+        }
+        .editable-row .value {
+            font-size: 13.5px;
+            font-weight: 700;
+            text-align: right;
+        }
+        .editable-row .value-input {
+            width: 140px;
+            text-align: right;
+            padding: 6px 10px;
+            border-radius: 10px;
+            border: 1.5px solid var(--line);
+            font-size: 13.5px;
+            font-weight: 700;
+            background: #fff;
+        }
+        .editable-row .value-input:focus {
+            border-color: var(--gold);
+            outline: none;
+        }
+
+        .inline-edit-textarea {
+            width: 100%;
+            min-height: 80px;
+            border: 1.5px solid var(--gold);
+            border-radius: 14px;
+            padding: 12px 14px;
+            font-family: inherit;
+            font-size: 14px;
+            line-height: 1.6;
+            background: #FFFDF5;
+            color: var(--ink);
+            resize: vertical;
+        }
+        .inline-edit-textarea:focus {
+            outline: 2px solid var(--gold);
+            outline-offset: 1px;
+        }
+
+        .inline-edit-input {
+            border: 1.5px solid var(--gold);
+            border-radius: 14px;
+            padding: 10px 14px;
+            font-family: inherit;
+            font-size: 15px;
+            background: #FFFDF5;
+            color: var(--ink);
+            width: 100%;
+        }
+        .inline-edit-input:focus {
+            outline: 2px solid var(--gold);
+            outline-offset: 1px;
+        }
+
+        .toast-success {
+            background: var(--ok);
+            color: #fff;
+        }
+
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 12px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 700;
+            background: var(--paper-warm);
+            color: var(--ink-soft);
+            cursor: pointer;
+        }
+        .btn-sm:hover {
+            background: var(--line);
+        }
+        .btn-sm.primary-sm {
+            background: var(--bamboo);
+            color: #fff;
+        }
+        .btn-sm.primary-sm:hover {
+            background: var(--bamboo-deep);
+        }
+
+        .edit-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .edit-actions button {
+            padding: 8px 18px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+        }
+        .edit-actions .save-btn {
+            background: var(--bamboo);
+            color: #fff;
+        }
+        .edit-actions .save-btn:hover {
+            background: var(--bamboo-deep);
+        }
+        .edit-actions .cancel-btn {
+            background: var(--paper-warm);
+            color: var(--ink-soft);
+        }
+        .edit-actions .cancel-btn:hover {
+            background: var(--line);
+        }
+
+        .voice-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 99px;
+            background: rgba(181, 80, 46, 0.12);
+            border: 1px solid var(--clay);
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--clay-deep);
+            animation: pulse-border 1.2s ease-in-out infinite;
+        }
+        @keyframes pulse-border {
+            0%,
+            100% {
+                border-color: var(--clay);
+            }
+            50% {
+                border-color: #d47a5a;
+            }
+        }
+
+        /* new logo style */
+        .splash-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .splash-logo svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 8px;
+        }
+        .splash-logo .brand-text {
+            font-family: 'Fraunces', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--bamboo-deep);
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+        .splash-logo .brand-sub {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink-soft);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel" data-presets="react">
+        const { useState, useEffect, useRef, useContext, createContext } = React;
+
+        // ---------- LANGUAGE CONTEXT ----------
+        const LanguageContext = createContext();
+
+        // ---------- PRODUCT DATA (ENGLISH & HINDI) ----------
+        const PRODUCT_EN = {
+            name: "Handwoven Bamboo Storage Basket",
+            material: "Natural Bamboo",
+            craft: "Handwoven",
+            color: "Natural Brown",
+            pattern: "Traditional Woven Pattern",
+            origin: "Jaipur, Rajasthan",
+            prodTime: "3 days",
+            description: "Handwoven bamboo storage basket crafted by hand using natural bamboo. Each basket is carefully woven using traditional techniques passed down through generations. Designed for practical everyday storage while preserving the character of traditional Indian craftsmanship.",
+            story: "Bamboo weaving has been part of Meera Devi's life since childhood. Her mother introduced her to the craft, teaching her the patience and precision behind every weave. For the past fourteen years, Meera has continued this tradition, creating each basket by hand using natural bamboo and techniques passed down through generations.",
+            materialCost: 450,
+            otherCost: 100,
+            suggestedPrice: 950,
+            rangeLow: 850,
+            rangeHigh: 1050,
+            stock: 12,
+            moq: 5
+        };
+
+        const PRODUCT_HI = {
+            name: "हस्तनिर्मित बाँस स्टोरेज बास्केट",
+            material: "प्राकृतिक बाँस",
+            craft: "हथकरघा",
+            color: "प्राकृतिक भूरा",
+            pattern: "पारंपरिक बुनाई पैटर्न",
+            origin: "जयपुर, राजस्थान",
+            prodTime: "3 दिन",
+            description: "प्राकृतिक बाँस का उपयोग करके हाथ से बनाई गई हस्तनिर्मित बाँस स्टोरेज बास्केट। प्रत्येक बास्केट को पीढ़ियों से चली आ रही पारंपरिक तकनीकों का उपयोग करके सावधानीपूर्वक बुना जाता है। पारंपरिक भारतीय शिल्प की विशेषता को संरक्षित करते हुए व्यावहारिक दैनिक भंडारण के लिए डिज़ाइन किया गया।",
+            story: "बाँस बुनाई मीरा देवी के जीवन का बचपन से ही हिस्सा रही है। उनकी माँ ने उन्हें इस शिल्प से परिचित कराया, उन्हें हर बुनाई के पीछे धैर्य और सटीकता सिखाई। पिछले चौदह वर्षों से, मीरा ने इस परंपरा को जारी रखा है, प्राकृतिक बाँस और पीढ़ियों से चली आ रही तकनीकों का उपयोग करके प्रत्येक बास्केट को हाथ से बनाया है।",
+            materialCost: 450,
+            otherCost: 100,
+            suggestedPrice: 950,
+            rangeLow: 850,
+            rangeHigh: 1050,
+            stock: 12,
+            moq: 5
+        };
+
+        // ---------- STRINGS ----------
+        const STRINGS = {
+            en: {
+                home: "Home",
+                beforeLabel: "BEFORE",
+                afterLabel: "AFTER",
+                appName: "ShilpSetu",
+                tagline: "Your craft. Your digital business.",
+                splashDesc: "Turn your handmade products into professional digital listings and reach more buyers with AI.",
+                getStarted: "Get Started",
+                chooseLang: "Choose your language",
+                langSub: "You can change this anytime.",
+                continue: "Continue",
+                roleTitle: "What do you want to do?",
+                roleSub: "Choose the option that fits you best.",
+                artisan: "Artisan",
+                artisanDesc: "I make handmade products",
+                buyer: "Buyer",
+                buyerDesc: "I want to buy handmade products",
+                continueAs: "Continue as",
+                profileTitle: "Let's set up your artisan profile",
+                profileSub: "This is what buyers will see about you.",
+                craftLabel: "Craft",
+                experienceLabel: "Experience",
+                orSpeak: "Or speak instead of typing",
+                tapMicProfile: "Tap the microphone to tell us about yourself",
+                createBusiness: "Create My Business",
+                goodMorning: "Good morning",
+                addProduct: "+ Add New Product",
+                myProducts: "My Products",
+                orders: "Orders",
+                myIncome: "My Income",
+                askShilpSetu: "Ask ShilpSetu",
+                askExample: '"How is my business doing?"',
+                yourProducts: "Your products",
+                live: "LIVE",
+                productName: "Handwoven Bamboo Storage Basket",
+                price: "₹950",
+                stock: "12 in stock",
+                productsTab: "Your Products",
+                productsSub: "Everything you've listed on ShilpSetu.",
+                addAnother: "+ Add another product",
+                buyersTab: "Buyers",
+                buyersSub: "People and stores interested in your craft.",
+                businessTab: "Your Business",
+                businessSub: "A quick look at how things are going.",
+                enquiries: "Enquiries",
+                sales: "Sales",
+                bestSeller: "Best seller",
+                askBusiness: "Ask ShilpSetu about your business",
+                askBusinessSub: "Get simple answers, no charts to read",
+                profileTab: "Your Profile",
+                businessSummary: "Business summary",
+                backToHome: "Back to Home",
+                addProductTitle: "Let's add your product",
+                addProductSub: "Take a photo and tell us about it. ShilpSetu will do the digital work.",
+                takePhoto: "Take a Photo",
+                takePhotoDesc: "Use your camera right now",
+                chooseGallery: "Choose from Gallery",
+                chooseGalleryDesc: "Pick a photo you already have",
+                tellUs: "Tell Us About Your Product",
+                tellUsDesc: "Start with your voice instead",
+                cameraFrame: "Place your product inside the frame",
+                photoCaptured: "Photo captured",
+                useThisPhoto: "Use This Photo",
+                retake: "Retake",
+                aiEnhance: "ShilpSetu AI is improving your product photo",
+                aiEnhanceDone: "Your product photo is ready",
+                aiAtWork: "AI at work",
+                aiSteps: ["Detecting product", "Removing background distractions", "Improving lighting",
+                    "Correcting framing", "Centering product", "Preparing marketplace image"
+                ],
+                beforeAfterDesc: "AI improved the lighting, removed background distractions, and centered your product. Drag the slider to compare.",
+                useEnhanced: "Use Enhanced Photo",
+                retakePhoto: "Retake Photo",
+                tellProduct: "Tell us about your product",
+                tellProductSub: "You can speak instead of typing.",
+                tapAndSpeak: "Tap and speak",
+                listening: "Listening…",
+                recordingComplete: "Recording complete",
+                continue: "Continue",
+                understandingProduct: "Understanding your product…",
+                whatMeeraSaid: "What Meera said",
+                productDetailsReady: "Your product details are ready",
+                aiGeneratedDetails: "AI-generated details",
+                looksGood: "Looks Good",
+                editDetails: "Edit Details",
+                productDescription: "Your product description",
+                aiGeneratedDesc: "AI-generated description",
+                useDescription: "Use Description",
+                edit: "Edit",
+                craftStoryIntro: "Tell the story behind your craft",
+                craftStorySub: "Your story makes your product special.",
+                aiCraftStoryteller: "AI Craft Storyteller",
+                tapSpeakStory: "Tap and speak",
+                recordingStory: "Recording your story…",
+                creatingStory: "Creating your Craft Story…",
+                meerasCraftStory: "Meera's Craft Story",
+                aiGeneratedCraftStory: "AI-generated Craft Story",
+                addCraftStory: "Add My Craft Story",
+                skip: "Skip",
+                pricingTitle: "Let's price your product",
+                pricingSub: "Tell us your costs and ShilpSetu will estimate a competitive price.",
+                materialCost: "Raw Material Cost",
+                otherCosts: "Other Costs",
+                productionTime: "Production Time",
+                speakCosts: "Speak your costs",
+                suggestPrice: "Suggest a Price",
+                calculatingPrice: "Calculating a suggested price…",
+                suggestedPrice: "Suggested price",
+                aiEstimate: "AI estimate, not guaranteed",
+                suggestedRange: "Range",
+                howEstimated: "How this was estimated",
+                usePrice: "Use ₹",
+                changePrice: "Change Price",
+                reviewListing: "Review your listing",
+                reviewSub: "Everything ShilpSetu prepared for you.",
+                description: "Description",
+                craftStory: "Craft story",
+                createdWithAI: "Created with help from ShilpSetu AI",
+                publishProduct: "Publish Product",
+                preparingListing: "Preparing your product listing…",
+                productLive: "Your product is live.",
+                buyersCanDiscover: "Buyers can now discover your bamboo basket.",
+                findBuyers: "Find Buyers",
+                foundBuyers: "ShilpSetu found buyers for your product",
+                foundBuyersSub: "Based on your product type, material, price and buyer requirements.",
+                whyBuyer: "Why this buyer?",
+                interestedIn: "Interested in handmade bamboo products",
+                lookingFor: "Looking for 5–20 units",
+                targetPrice: "Target price ₹900–₹1,000",
+                interestedInCrafts: "Interested in traditional Indian crafts",
+                viewBestMatch: "View Best Match",
+                buyerDetailTitle: "Rajasthan Home Living",
+                matchTag: "94% Match",
+                interestedQty: "Interested in 5 bamboo baskets",
+                expectedPrice: "Expected price: ₹900 – ₹1,000",
+                suggestedReply: "Suggested reply",
+                send: "Send",
+                editReply: "Edit",
+                useSuggestion: "Use Suggestion",
+                messageSent: "Message sent to Rajasthan Home Living",
+                checkBusiness: "Check My Business",
+                copilotTitle: "Ask ShilpSetu",
+                copilotTag: "Business Copilot",
+                howBusiness: "How is my business doing?",
+                ask: "Ask",
+                copilotResponse: "You currently have:\n12 enquiries\n4 orders\n₹46,000 in sales\n\nYour bamboo baskets are receiving strong buyer interest.",
+                suggestedQuestions: ["Which product is performing best?", "Who should I contact?",
+                    "How can I improve my sales?"
+                ],
+                finishJourney: "Finish Journey",
+                journeySummary: "The artisan creates the craft.\nShilpSetu creates the digital business.",
+                back: "Back",
+                save: "Save",
+                cancel: "Cancel",
+                saveChanges: "Save Changes",
+                saveDescription: "Save Description",
+                saveStory: "Save Story",
+                savePrice: "Save Price",
+                editCraftStory: "Edit",
+                skipCraftStory: "Skip",
+                changePriceLabel: "Change Price",
+                speakNow: "Speak now...",
+                stopListening: "Stop Listening",
+                extractedCosts: "I understood your costs:",
+                materialExtracted: "Raw Material Cost: ₹",
+                otherExtracted: "Other Costs: ₹",
+                timeExtracted: "Production Time: ",
+                listeningCopilot: "Listening to your question…",
+                askCopilot: "Ask a question",
+                copilotQuestion: "How is my business doing?",
+                copilotResponseDetailed: "You currently have: 12 enquiries, 4 orders, ₹46,000 in sales. Your bamboo baskets are receiving strong buyer interest.",
+                step1: "Detecting product",
+                step2: "Removing background distractions",
+                step3: "Improving lighting",
+                step4: "Correcting framing",
+                step5: "Centering product",
+                step6: "Preparing marketplace image",
+                journeySteps: ["Handmade product", "Takes photo", "AI improves photo", "Speaks", "AI understands",
+                    "AI creates catalog", "AI creates craft story", "AI suggests price", "Meera approves",
+                    "Product goes live", "AI finds buyers", "Business grows"
+                ],
+                buyer1Name: "Rajasthan Home Living",
+                buyer1Match: "94% Match",
+                buyer2Name: "CraftRoots Store",
+                buyer2Match: "88% Match",
+                buyer3Name: "Heritage Basket Co.",
+                buyer3Match: "84% Match",
+                buyer1Detail: "Interested in 5 bamboo baskets",
+                buyer1Price: "Expected price: ₹900 – ₹1,000",
+                artisanName: "Meera Devi",
+                artisanLocation: "Jaipur, Rajasthan",
+                artisanCraft: "Traditional Bamboo & Cane Craft",
+                artisanExperience: "14 years",
+            },
+            hi: {
+                home: "होम",
+                beforeLabel: "पहले",
+                afterLabel: "बाद",
+                appName: "शिल्पसेतु",
+                tagline: "आपका शिल्प। आपका डिजिटल व्यवसाय।",
+                splashDesc: "अपने हस्तनिर्मित उत्पादों को पेशेवर डिजिटल लिस्टिंग में बदलें और AI के साथ अधिक खरीदारों तक पहुँचें।",
+                getStarted: "शुरू करें",
+                chooseLang: "अपनी भाषा चुनें",
+                langSub: "आप इसे कभी भी बदल सकते हैं।",
+                continue: "जारी रखें",
+                roleTitle: "आप क्या करना चाहते हैं?",
+                roleSub: "अपने लिए उपयुक्त विकल्प चुनें।",
+                artisan: "कारीगर",
+                artisanDesc: "मैं हस्तनिर्मित उत्पाद बनाती हूँ",
+                buyer: "खरीदार",
+                buyerDesc: "मैं हस्तनिर्मित उत्पाद खरीदना चाहता/चाहती हूँ",
+                continueAs: "इस रूप में जारी रखें",
+                profileTitle: "आइए आपकी कारीगर प्रोफ़ाइल सेट करें",
+                profileSub: "खरीदार आपके बारे में यही देखेंगे।",
+                craftLabel: "शिल्प",
+                experienceLabel: "अनुभव",
+                orSpeak: "या टाइप करने के बजाय बोलें",
+                tapMicProfile: "अपने बारे में बताने के लिए माइक्रोफोन टैप करें",
+                createBusiness: "मेरा व्यवसाय बनाएँ",
+                goodMorning: "सुप्रभात",
+                addProduct: "+ नया उत्पाद जोड़ें",
+                myProducts: "मेरे उत्पाद",
+                orders: "ऑर्डर",
+                myIncome: "मेरी आय",
+                askShilpSetu: "शिल्पसेतु से पूछें",
+                askExample: '"मेरा व्यवसाय कैसा चल रहा है?"',
+                yourProducts: "आपके उत्पाद",
+                live: "लाइव",
+                productName: "हस्तनिर्मित बाँस स्टोरेज बास्केट",
+                price: "₹950",
+                stock: "12 स्टॉक में",
+                productsTab: "आपके उत्पाद",
+                productsSub: "शिल्पसेतु पर आपके द्वारा सूचीबद्ध सभी उत्पाद।",
+                addAnother: "+ एक और उत्पाद जोड़ें",
+                buyersTab: "खरीदार",
+                buyersSub: "आपके शिल्प में रुचि रखने वाले लोग और स्टोर।",
+                businessTab: "आपका व्यवसाय",
+                businessSub: "एक त्वरित नज़र कि चीजें कैसी चल रही हैं।",
+                enquiries: "पूछताछ",
+                sales: "बिक्री",
+                bestSeller: "सबसे अधिक बिकने वाला",
+                askBusiness: "शिल्पसेतु से अपने व्यवसाय के बारे में पूछें",
+                askBusinessSub: "सरल उत्तर पाएँ, चार्ट पढ़ने की ज़रूरत नहीं",
+                profileTab: "आपकी प्रोफ़ाइल",
+                businessSummary: "व्यवसाय सारांश",
+                backToHome: "होम पर वापस जाएँ",
+                addProductTitle: "आइए आपका उत्पाद जोड़ें",
+                addProductSub: "एक फोटो लें और हमें इसके बारे में बताएँ। शिल्पसेतु डिजिटल काम करेगा।",
+                takePhoto: "फोटो लें",
+                takePhotoDesc: "अभी अपना कैमरा उपयोग करें",
+                chooseGallery: "गैलरी से चुनें",
+                chooseGalleryDesc: "कोई मौजूदा फोटो चुनें",
+                tellUs: "हमें अपने उत्पाद के बारे में बताएँ",
+                tellUsDesc: "इसके बजाय अपनी आवाज़ से शुरू करें",
+                cameraFrame: "अपने उत्पाद को फ्रेम के अंदर रखें",
+                photoCaptured: "फोटो कैप्चर हो गई",
+                useThisPhoto: "इस फोटो का उपयोग करें",
+                retake: "फिर से लें",
+                aiEnhance: "शिल्पसेतु AI आपकी उत्पाद फोटो को सुधार रहा है",
+                aiEnhanceDone: "आपकी उत्पाद फोटो तैयार है",
+                aiAtWork: "AI कार्यरत",
+                aiSteps: ["उत्पाद का पता लगाना", "पृष्ठभूमि की गड़बड़ी हटाना", "प्रकाश में सुधार",
+                    "फ्रेमिंग को सही करना", "उत्पाद को केंद्रित करना", "मार्केटप्लेस छवि तैयार करना"
+                ],
+                beforeAfterDesc: "AI ने प्रकाश में सुधार किया, पृष्ठभूमि की गड़बड़ी हटाई, और आपके उत्पाद को केंद्रित किया। तुलना करने के लिए स्लाइडर को खींचें।",
+                useEnhanced: "सुधारी गई फोटो का उपयोग करें",
+                retakePhoto: "फोटो फिर से लें",
+                tellProduct: "हमें अपने उत्पाद के बारे में बताएँ",
+                tellProductSub: "आप टाइप करने के बजाय बोल सकते हैं।",
+                tapAndSpeak: "टैप करें और बोलें",
+                listening: "सुन रहा हूँ…",
+                recordingComplete: "रिकॉर्डिंग पूरी हुई",
+                continue: "जारी रखें",
+                understandingProduct: "आपके उत्पाद को समझ रहा हूँ…",
+                whatMeeraSaid: "मीरा ने क्या कहा",
+                productDetailsReady: "आपके उत्पाद का विवरण तैयार है",
+                aiGeneratedDetails: "AI-जनित विवरण",
+                looksGood: "अच्छा लग रहा है",
+                editDetails: "विवरण संपादित करें",
+                productDescription: "आपका उत्पाद विवरण",
+                aiGeneratedDesc: "AI-जनित विवरण",
+                useDescription: "विवरण का उपयोग करें",
+                edit: "संपादित करें",
+                craftStoryIntro: "अपने शिल्प के पीछे की कहानी बताएँ",
+                craftStorySub: "आपकी कहानी आपके उत्पाद को खास बनाती है।",
+                aiCraftStoryteller: "AI क्राफ्ट स्टोरीटेलर",
+                tapSpeakStory: "टैप करें और बोलें",
+                recordingStory: "आपकी कहानी रिकॉर्ड कर रहा हूँ…",
+                creatingStory: "आपकी क्राफ्ट स्टोरी बना रहा हूँ…",
+                meerasCraftStory: "मीरा की क्राफ्ट स्टोरी",
+                aiGeneratedCraftStory: "AI-जनित क्राफ्ट स्टोरी",
+                addCraftStory: "मेरी क्राफ्ट स्टोरी जोड़ें",
+                skip: "छोड़ें",
+                pricingTitle: "आइए आपके उत्पाद की कीमत तय करें",
+                pricingSub: "हमें अपनी लागत बताएँ और शिल्पसेतु एक प्रतिस्पर्धी मूल्य का अनुमान लगाएगा।",
+                materialCost: "कच्चे माल की लागत",
+                otherCosts: "अन्य लागतें",
+                productionTime: "उत्पादन समय",
+                speakCosts: "अपनी लागत बोलें",
+                suggestPrice: "मूल्य सुझाएँ",
+                calculatingPrice: "सुझाए गए मूल्य की गणना कर रहा हूँ…",
+                suggestedPrice: "सुझाया गया मूल्य",
+                aiEstimate: "AI अनुमान, गारंटी नहीं",
+                suggestedRange: "सीमा",
+                howEstimated: "यह कैसे अनुमानित किया गया",
+                usePrice: "₹",
+                changePrice: "मूल्य बदलें",
+                reviewListing: "अपनी लिस्टिंग की समीक्षा करें",
+                reviewSub: "शिल्पसेतु ने आपके लिए जो कुछ तैयार किया है।",
+                description: "विवरण",
+                craftStory: "क्राफ्ट स्टोरी",
+                createdWithAI: "शिल्पसेतु AI की सहायता से निर्मित",
+                publishProduct: "उत्पाद प्रकाशित करें",
+                preparingListing: "आपकी उत्पाद लिस्टिंग तैयार कर रहा हूँ…",
+                productLive: "आपका उत्पाद लाइव है।",
+                buyersCanDiscover: "खरीदार अब आपकी बाँस बास्केट खोज सकते हैं।",
+                findBuyers: "खरीदार खोजें",
+                foundBuyers: "शिल्पसेतु ने आपके उत्पाद के लिए खरीदार ढूंढे",
+                foundBuyersSub: "आपके उत्पाद प्रकार, सामग्री, मूल्य और खरीदार आवश्यकताओं के आधार पर।",
+                whyBuyer: "यह खरीदार क्यों?",
+                interestedIn: "हस्तनिर्मित बाँस उत्पादों में रुचि",
+                lookingFor: "5–20 यूनिट की तलाश",
+                targetPrice: "लक्ष्य मूल्य ₹900–₹1,000",
+                interestedInCrafts: "पारंपरिक भारतीय शिल्प में रुचि",
+                viewBestMatch: "सर्वश्रेष्ठ मैच देखें",
+                buyerDetailTitle: "राजस्थान होम लिविंग",
+                matchTag: "94% मैच",
+                interestedQty: "5 बाँस बास्केट में रुचि",
+                expectedPrice: "अपेक्षित मूल्य: ₹900 – ₹1,000",
+                suggestedReply: "सुझाया गया उत्तर",
+                send: "भेजें",
+                editReply: "संपादित करें",
+                useSuggestion: "सुझाव का उपयोग करें",
+                messageSent: "राजस्थान होम लिविंग को संदेश भेज दिया गया",
+                checkBusiness: "मेरा व्यवसाय देखें",
+                copilotTitle: "शिल्पसेतु से पूछें",
+                copilotTag: "बिजनेस कोपायलट",
+                howBusiness: "मेरा व्यवसाय कैसा चल रहा है?",
+                ask: "पूछें",
+                copilotResponse: "आपके पास वर्तमान में:\n12 पूछताछ\n4 ऑर्डर\n₹46,000 की बिक्री\n\nआपकी बाँस बास्केट खरीदारों के बीच मजबूत रुचि पैदा कर रही है।",
+                suggestedQuestions: ["कौन सा उत्पाद सबसे अच्छा प्रदर्शन कर रहा है?", "मुझे किससे संपर्क करना चाहिए?",
+                    "मैं अपनी बिक्री कैसे सुधार सकता/सकती हूँ?"
+                ],
+                finishJourney: "यात्रा समाप्त करें",
+                journeySummary: "कारीगर शिल्प बनाता है।\nशिल्पसेतु डिजिटल व्यवसाय बनाता है।",
+                back: "वापस",
+                save: "सहेजें",
+                cancel: "रद्द करें",
+                saveChanges: "बदलाव सहेजें",
+                saveDescription: "विवरण सहेजें",
+                saveStory: "कहानी सहेजें",
+                savePrice: "मूल्य सहेजें",
+                editCraftStory: "संपादित करें",
+                skipCraftStory: "छोड़ें",
+                changePriceLabel: "मूल्य बदलें",
+                speakNow: "अभी बोलें...",
+                stopListening: "सुनना बंद करें",
+                extractedCosts: "मैंने आपकी लागतें समझ ली हैं:",
+                materialExtracted: "कच्चे माल की लागत: ₹",
+                otherExtracted: "अन्य लागतें: ₹",
+                timeExtracted: "उत्पादन समय: ",
+                listeningCopilot: "आपका प्रश्न सुन रहा हूँ…",
+                askCopilot: "प्रश्न पूछें",
+                copilotQuestion: "मेरा व्यवसाय कैसा चल रहा है?",
+                copilotResponseDetailed: "आपके पास वर्तमान में: 12 पूछताछ, 4 ऑर्डर, ₹46,000 की बिक्री। आपकी बाँस बास्केट खरीदारों के बीच मजबूत रुचि पैदा कर रही है।",
+                step1: "उत्पाद का पता लगाना",
+                step2: "पृष्ठभूमि की गड़बड़ी हटाना",
+                step3: "प्रकाश में सुधार",
+                step4: "फ्रेमिंग को सही करना",
+                step5: "उत्पाद को केंद्रित करना",
+                step6: "मार्केटप्लेस छवि तैयार करना",
+                journeySteps: ["हस्तनिर्मित उत्पाद", "फोटो लेता है", "AI फोटो सुधारता है", "बोलता है",
+                    "AI समझता है", "AI कैटलॉग बनाता है", "AI क्राफ्ट स्टोरी बनाता है", "AI मूल्य सुझाता है",
+                    "मीरा स्वीकार करती है", "उत्पाद लाइव होता है", "AI खरीदार ढूंढता है", "व्यवसाय बढ़ता है"
+                ],
+                buyer1Name: "राजस्थान होम लिविंग",
+                buyer1Match: "94% मैच",
+                buyer2Name: "क्राफ्टरूट्स स्टोर",
+                buyer2Match: "88% मैच",
+                buyer3Name: "हेरिटेज बास्केट कंपनी",
+                buyer3Match: "84% मैच",
+                buyer1Detail: "5 बाँस बास्केट में रुचि",
+                buyer1Price: "अपेक्षित मूल्य: ₹900 – ₹1,000",
+                artisanName: "मीरा देवी",
+                artisanLocation: "जयपुर, राजस्थान",
+                artisanCraft: "पारंपरिक बाँस और बेंत शिल्प",
+                artisanExperience: "14 वर्ष",
+            }
+        };
+
+        function useStrings() {
+            const { lang } = useContext(LanguageContext);
+            return STRINGS[lang] || STRINGS.en;
+        }
+
+        function useProduct() {
+            const { lang } = useContext(LanguageContext);
+            return lang === "hi" ? PRODUCT_HI : PRODUCT_EN;
+        }
+
+        // ---------- ICONS ----------
+        const Icon = ({ name, size = 20, color = "currentColor" }) => {
+            const p = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: color, strokeWidth: 1.8,
+                strokeLinecap: "round", strokeLinejoin: "round" };
+            switch (name) {
+                case "mic":
+                    return <svg { ...p }><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 10a7 7 0 0 0 14 0" /><line x1="12" y1="19" x2="12" y2="22" /></svg>;
+                case "camera":
+                    return <svg { ...p }><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" /><circle cx="12" cy="13" r="3.5" /></svg>;
+                case "check":
+                    return <svg { ...p }><polyline points="20 6 9 17 4 12" /></svg>;
+                case "arrow-right":
+                    return <svg { ...p }><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>;
+                case "arrow-left":
+                    return <svg { ...p }><line x1="19" y1="12" x2="5" y2="12" /><polyline points="12 19 5 12 12 5" /></svg>;
+                case "home":
+                    return <svg { ...p }><path d="M3 11l9-7 9 7" /><path d="M5 10v10h14V10" /></svg>;
+                case "box":
+                    return <svg { ...p }><path d="M21 8l-9-5-9 5 9 5 9-5z" /><path d="M3 8v8l9 5 9-5V8" /><line x1="12" y1="13" x2="12" y2="21" /></svg>;
+                case "users":
+                    return <svg { ...p }><circle cx="9" cy="8" r="3.2" /><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6" /><circle cx="18" cy="9" r="2.6" /><path d="M15 20c0-2.6 1.7-4.6 4-5.2" /></svg>;
+                case "chart":
+                    return <svg { ...p }><line x1="4" y1="20" x2="20" y2="20" /><rect x="6" y="12" width="3" height="7" /><rect x="11" y="8" width="3" height="11" /><rect x="16" y="4" width="3" height="15" /></svg>;
+                case "user":
+                    return <svg { ...p }><circle cx="12" cy="8" r="3.5" /><path d="M4.5 20c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5" /></svg>;
+                case "sparkle":
+                    return <svg { ...p }><path d="M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6L12 3z" /></svg>;
+                case "edit":
+                    return <svg { ...p }><path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" /></svg>;
+                case "bolt":
+                    return <svg { ...p }><polygon points="13 2 3 14 11 14 9 22 21 10 13 10 13 2" /></svg>;
+                case "flash":
+                    return <svg { ...p }><polygon points="13 2 3 14 11 14 9 22 21 10 13 10 13 2" /></svg>;
+                case "flip":
+                    return <svg { ...p }><path d="M17 2l4 4-4 4" /><path d="M3 12v-2a4 4 0 0 1 4-4h14" /><path d="M7 22l-4-4 4-4" /><path d="M21 12v2a4 4 0 0 1-4 4H3" /></svg>;
+                case "send":
+                    return <svg { ...p }><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>;
+                case "leaf":
+                    return <svg { ...p }><path d="M11 21c-6 0-9-4-9-9 5 0 9 2 9 9z" /><path d="M11 21c6-2 9-7 9-13-6 0-10 3-11 9" /></svg>;
+                case "rupee":
+                    return <svg { ...p }><path d="M6 4h12" /><path d="M6 9h12" /><path d="M6 4c5 0 8 2 8 5s-3 5-8 5" /><path d="M6 14l8 7" /></svg>;
+                case "tag":
+                    return <svg { ...p }><path d="M20.5 12.5l-8-8H4v8.5l8 8a2 2 0 0 0 2.8 0l5.7-5.7a2 2 0 0 0 0-2.8z" /><circle cx="8.5" cy="8.5" r="1.2" fill={ color } stroke="none" /></svg>;
+                default:
+                    return null;
+            }
+        };
+
+        // ---------- ILLUSTRATIONS ----------
+        const Palette = { skin: "#C48A56", skinDeep: "#A66E3E", saree: "#8E3B21", sareeDeep: "#6E2C18",
+            dupatta: "#2F6F62", headscarf: "#B5502E", bamboo: "#C9A24A", bambooDeep: "#9C7A2E", mat: "#D8C89A" };
+
+        function MeeraPortrait({ size = 112, mood = "calm" }) {
+            return (
+                <svg width={ size } height={ size } viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="58" fill="#F3E4C4" />
+                    <path d="M18 96c4-24 18-38 42-38s38 14 42 38" fill={ Palette.saree } />
+                    <path d="M30 92c6-18 15-27 30-27s24 9 30 27" fill={ Palette.dupatta } opacity="0.9" />
+                    <circle cx="60" cy="47" r="24" fill={ Palette.skin } />
+                    <path d="M36 40c0-16 10-27 24-27s24 11 24 27c0-6-3-11-9-13-4 6-13 8-21 8-6 0-11 2-14 6-2 3-4 5-4 5z" fill={ Palette
+                            .headscarf } />
+                    <path d="M84 40c1-3 1-6 0-9" stroke={ Palette.headscarf } strokeWidth="6" fill="none" strokeLinecap="round" />
+                    { mood === "happy" ? (
+                        <>
+                            <path d="M48 52c1 2 3 2 4 0" stroke="#3a2413" strokeWidth="2" fill="none" strokeLinecap="round" />
+                            <path d="M68 52c1 2 3 2 4 0" stroke="#3a2413" strokeWidth="2" fill="none" strokeLinecap="round" />
+                            <path d="M50 60c3 4 17 4 20 0" stroke="#3a2413" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+                        </>
+                    ) : (
+                        <>
+                            <circle cx="50" cy="50" r="2" fill="#3a2413" />
+                            <circle cx="70" cy="50" r="2" fill="#3a2413" />
+                            <path d="M52 61c3 2 13 2 16 0" stroke="#3a2413" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+                        </>
+                    ) }
+                    <circle cx="60" cy="45" r="1.6" fill={ Palette.headscarf } />
+                </svg>
+            );
+        }
+
+        function WorkshopScene({ cluttered = true }) {
+            return (
+                <svg viewBox="0 0 320 320" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+                    <rect width="320" height="320" fill={ cluttered ? "#E7D6AA" : "#F6EBCE" } />
+                    { cluttered && <>
+                        <rect x="0" y="0" width="320" height="150" fill="#DCC896" />
+                        <rect x="10" y="20" width="18" height="130" fill="#C6A96A" />
+                        <rect x="40" y="10" width="18" height="140" fill="#B79A5D" />
+                        <rect x="260" y="15" width="18" height="135" fill="#C6A96A" />
+                        <rect x="288" y="30" width="18" height="120" fill="#B79A5D" />
+                        <ellipse cx="250" cy="80" rx="46" ry="30" fill="#D8B36B" opacity="0.6" />
+                        <circle cx="60" cy="70" r="22" fill="#CBAE72" opacity="0.7" />
+                    </> }
+                    <rect x="0" y="220" width="320" height="100" fill={ cluttered ? "#CBB27C" : "#EFE0B8" } />
+                    <g transform="translate(90,150)">
+                        <foreignObject x="-70" y="-10" width="220" height="220">
+                            <div xmlns="http://www.w3.org/1999/xhtml" style={ { transform: "scale(1.7)" } }><MeeraPortrait
+                                    size={ 90 } /></div>
+                        </foreignObject>
+                    </g>
+                    <g transform="translate(150,190) scale(1.05)">
+                        <BasketArt size={ 110 } clean={ false } />
+                    </g>
+                </svg>
+            );
+        }
+
+        function BasketArt({ size = 140, clean = false }) {
+            const weave = [];
+            for (let i = 0; i < 7; i++) {
+                weave.push(<path key={ i } d={ `M${18+i*10} ${40} Q${23+i*10} ${70} ${18+i*10} ${100}` } stroke={ i % 2 ?
+                        Palette.bambooDeep : Palette.bamboo } strokeWidth="6" fill="none" strokeLinecap="round" />);
+            }
+            for (let j = 0; j < 5; j++) {
+                weave.push(<path key={ "h" + j } d={ `M15 ${45+j*12} Q60 ${52+j*12} 105 ${45+j*12}` } stroke={ j % 2 ?
+                        Palette.bamboo : Palette.bambooDeep } strokeWidth="5" fill="none" strokeLinecap="round"
+                    opacity="0.85" />);
+            }
+            return (
+                <svg width={ size } height={ size } viewBox="0 0 120 120">
+                    { clean && <rect x="0" y="0" width="120" height="120" rx="16" fill="#FFFFFF" /> }
+                    { !clean && <rect x="0" y="0" width="120" height="120" rx="16" fill="#EFE3C4" /> }
+                    <ellipse cx="60" cy="104" rx="42" ry="7" fill={ clean ? "#EFE3C4" : "#DDCB9E" } opacity={ clean ? 0.5 :
+                        0.9 } />
+                    <path d="M14 42 Q60 30 106 42 L100 100 Q60 112 20 100 Z" fill="#E4CE94" stroke={ Palette.bambooDeep }
+                        strokeWidth="2" />
+                    <g clipPath="url(#bclip)">{ weave }</g>
+                    <path d="M14 42 Q60 30 106 42 Q60 52 14 42Z" fill={ Palette.bamboo } stroke={ Palette.bambooDeep }
+                        strokeWidth="2" />
+                    <path d="M30 36 Q60 24 90 36" stroke={ Palette.bambooDeep } strokeWidth="4" fill="none"
+                        strokeLinecap="round" />
+                    <defs><clipPath id="bclip"><path d="M14 42 Q60 30 106 42 L100 100 Q60 112 20 100 Z" /></clipPath></defs>
+                </svg>
+            );
+        }
+
+        // ---------- Product Image component ----------
+        function ProductImage({ size = 140, className = "" }) {
+            return (
+                <img src="after.png" alt="Product" style={ { width: size, height: size, objectFit: "cover", borderRadius: 16 } }
+                    className={ className } />
+            );
+        }
+
+        // ---------- SMALL UI PARTS ----------
+        function ScreenShell({ children }) { return <div className="screen-inner fade-in">{ children }</div>; }
+
+        function Header({ title, sub, onBack, tagText, tagType, backLabel }) {
+            const s = useStrings();
+            return (
+                <div style={ { marginBottom: 18 } }>
+                    { onBack &&
+                        <button onClick={ onBack } className="btn-ghost" style={ { display: "flex", alignItems: "center",
+                                gap: 6, marginBottom: 12, paddingLeft: 0 } }><Icon name="arrow-left" size={ 16 } /> { backLabel ||
+                                s.back }</button> }
+                    { tagText && <div className={ "tag" + (tagType ? (" " + tagType) : "") } style={ { marginBottom: 10 } }>{ tagType ===
+                            "ai" && <Icon name="sparkle" size={ 13 } /> }{ tagText }</div> }
+                    <h1 className="serif" style={ { fontSize: 24, fontWeight: 600, margin: "0 0 6px", lineHeight: 1.25 } }>{ title }</h1>
+                    { sub && <p style={ { margin: 0, color: "var(--ink-soft)", fontSize: 14.5, lineHeight: 1.5 } }>{ sub }</p> }
+                </div>
+            );
+        }
+
+        function Waveform() {
+            const bars = Array.from({ length: 22 });
+            return <div className="wave">{ bars.map((_, i) => <span key={ i } style={ { animationDelay: (i * 0.05) +
+                        "s" } } />) }</div>;
+        }
+
+        function Checklist({ items, onDone, speed = 650 }) {
+            const [shown, setShown] = useState(0);
+            useEffect(() => {
+                if (shown >= items.length) { onDone && onDone(); return; }
+                const t = setTimeout(() => setShown(s => s + 1), speed);
+                return () => clearTimeout(t);
+            }, [shown]);
+            return (
+                <div style={ { margin: "6px 0 4px" } }>
+                    { items.slice(0, shown).map((it, i) => (
+                        <div className="checklist-item" key={ i } style={ { animationDelay: "0s" } }>
+                            <span className="check-dot"><Icon name="check" size={ 13 } color="#fff" /></span>
+                            <span style={ { color: "var(--ink)" } }>{ it }</span>
+                        </div>
+                    )) }
+                    { shown < items.length && (
+                        <div className="checklist-item" style={ { opacity: 1 } }>
+                            <span className="check-dot pending"></span>
+                            <span>{ items[shown] }</span>
+                        </div>
+                    ) }
+                </div>
+            );
+        }
+
+        function ProgressDots({ step, total }) {
+            return <div className="progressdots">{ Array.from({ length: total }).map((_, i) => <span key={ i } className={ i <
+                        step ? "on" : "" } />) }</div>;
+        }
+
+        // ---------- APP ----------
+        function App() {
+            const [screen, setScreen] = useState("splash");
+            const [lang, setLang] = useState("en");
+            const [history, setHistory] = useState([]);
+            const [productPublished, setProductPublished] = useState(false);
+
+            const go = (s) => { setHistory(h => [...h, screen]);
+                setScreen(s); };
+            const back = () => {
+                setHistory(h => {
+                    if (h.length === 0) return h;
+                    const prev = h[h.length - 1];
+                    setScreen(prev);
+                    return h.slice(0, -1);
+                });
+            };
+
+            const showNav = ["home", "products", "buyers", "business", "profile2"].includes(screen);
+
+            let content;
+            switch (screen) {
+                case "splash":
+                    content = <Splash go={ go } />;
+                    break;
+                case "language":
+                    content = <LanguagePick go={ go } lang={ lang } setLang={ setLang } />;
+                    break;
+                case "role":
+                    content = <RolePick go={ go } />;
+                    break;
+                case "profile":
+                    content = <ProfileSetup go={ go } back={ back } />;
+                    break;
+                case "home":
+                    content = <Home go={ go } productPublished={ productPublished } />;
+                    break;
+                case "products":
+                    content = <ProductsTab go={ go } productPublished={ productPublished } />;
+                    break;
+                case "buyers":
+                    content = <BuyersTab go={ go } />;
+                    break;
+                case "business":
+                    content = <BusinessTab go={ go } />;
+                    break;
+                case "profile2":
+                    content = <ProfileTab go={ go } />;
+                    break;
+                case "addStart":
+                    content = <AddProductStart go={ go } back={ back } />;
+                    break;
+                case "camera":
+                    content = <CameraScreen go={ go } back={ back } />;
+                    break;
+                case "enhance":
+                    content = <EnhanceScreen go={ go } back={ back } />;
+                    break;
+                case "voiceDescribe":
+                    content = <VoiceDescribe go={ go } back={ back } />;
+                    break;
+                case "understandVoice":
+                    content = <UnderstandVoice go={ go } back={ back } />;
+                    break;
+                case "productDetails":
+                    content = <ProductDetails go={ go } back={ back } />;
+                    break;
+                case "aiDescription":
+                    content = <AIDescription go={ go } back={ back } />;
+                    break;
+                case "craftStoryIntro":
+                    content = <CraftStoryIntro go={ go } back={ back } />;
+                    break;
+                case "craftStoryVoice":
+                    content = <CraftStoryVoice go={ go } back={ back } />;
+                    break;
+                case "craftStoryProcess":
+                    content = <CraftStoryProcess go={ go } back={ back } />;
+                    break;
+                case "craftStoryReveal":
+                    content = <CraftStoryReveal go={ go } back={ back } />;
+                    break;
+                case "pricingInput":
+                    content = <PricingInput go={ go } back={ back } />;
+                    break;
+                case "pricingProcess":
+                    content = <PricingProcess go={ go } back={ back } />;
+                    break;
+                case "pricingReveal":
+                    content = <PricingReveal go={ go } back={ back } />;
+                    break;
+                case "finalReview":
+                    content = <FinalReview go={ go } back={ back } />;
+                    break;
+                case "publishing":
+                    content = <Publishing go={ go } back={ back } onPublishDone={ () => { setProductPublished(true); } } />;
+                    break;
+                case "live":
+                    content = <LiveListing go={ go } back={ back } />;
+                    break;
+                case "buyerMatch":
+                    content = <BuyerMatch go={ go } back={ back } />;
+                    break;
+                case "buyerDetail":
+                    content = <BuyerDetail go={ go } back={ back } />;
+                    break;
+                case "copilot":
+                    content = <Copilot go={ go } back={ back } />;
+                    break;
+                case "summary":
+                    content = <Summary go={ go } back={ back } />;
+                    break;
+                default:
+                    content = <Splash go={ go } />;
+            }
+
+            return (
+                <LanguageContext.Provider value={ { lang, setLang } }>
+                    <div className="stage">
+                        <div className="stage-side">
+                            <div className="brandmark">
+                                <div className="logo"><Icon name="leaf" color="#E3D9B8" size={ 24 } /></div>
+                                <div>
+                                    <div className="serif" style={ { fontSize: 20, fontWeight: 600 } }>ShilpSetu</div>
+                                    <div style={ { fontSize: 12.5, color: "var(--ink-soft)", fontWeight: 600 } }>SIH 2026 · PS
+                                        26090</div>
+                                </div>
+                            </div>
+                            <p className="side-quote">"AI does the digital work.<br />The artisan does the craft."</p>
+                            <p className="side-note">Following Meera Devi, a bamboo &amp; cane artisan from Jaipur, as she lists
+                                her handwoven storage basket — from workshop to marketplace, in one continuous session.</p>
+                        </div>
+
+                        <div className="phone">
+                            <div className="notch"></div>
+                            <div className="statusbar">
+                                <span>9:41</span>
+                                <span style={ { display: "flex", gap: 6, alignItems: "center" } }>
+                                    <svg width="16" height="12" viewBox="0 0 16 12"><rect width="14" height="10" rx="2" fill="none"
+                                            stroke="#241C14" strokeWidth="1" /><rect x="2" y="2" width="8" height="6"
+                                            fill="#241C14" /></svg>
+                                </span>
+                            </div>
+                            <div className="screen">
+                                { content }
+                            </div>
+                            { showNav && <BottomNav screen={ screen } go={ go } /> }
+                        </div>
+                    </div>
+                </LanguageContext.Provider>
+            );
+        }
+
+        function BottomNav({ screen, go }) {
+            const s = useStrings();
+            const items = [
+                ["home", "home", s.home],
+                ["products", "box", s.productsTab],
+                ["buyers", "users", s.buyersTab],
+                ["business", "chart", s.businessTab],
+                ["profile2", "user", s.profileTab]
+            ];
+            return (
+                <div className="bottomnav">
+                    { items.map(([key, icon, label]) => (
+                        <button key={ key } className={ "navitem" + (screen === key ? " active" : "") } onClick={ () => go(
+                            key) }>
+                            <Icon name={ icon } size={ 20 } />{ label }
+                        </button>
+                    )) }
+                </div>
+            );
+        }
+
+        // ---------- ONBOARDING ----------
+        function Splash({ go }) {
+            const s = useStrings();
+            return (
+                <ScreenShell>
+                    <div style={ { flex: 1, display: "flex", flexDirection: "column", justifyContent: "center",
+                            alignItems: "center", textAlign: "center", gap: 22 } }>
+                        <div className="splash-logo">
+                            <svg viewBox="0 0 120 120" width="80" height="80">
+                                <circle cx="60" cy="60" r="54" fill="#2E4A34" opacity="0.1" />
+                                <circle cx="60" cy="60" r="48" fill="none" stroke="#2E4A34" strokeWidth="2" strokeDasharray="4 4" />
+                                <path d="M60 20 L65 40 L85 45 L65 50 L60 70 L55 50 L35 45 L55 40 Z" fill="#2E4A34" opacity="0.9" />
+                                <path d="M40 70 L50 75 L45 85 L35 80 Z" fill="#B5502E" opacity="0.8" />
+                                <path d="M80 70 L70 75 L75 85 L85 80 Z" fill="#B5502E" opacity="0.8" />
+                                <path d="M60 55 L60 80" stroke="#2E4A34" strokeWidth="2" strokeLinecap="round" />
+                                <circle cx="60" cy="55" r="4" fill="#E3A63E" />
+                            </svg>
+                            <div className="brand-text">ShilpSetu</div>
+                            <div className="brand-sub">Your craft · Your digital business</div>
+                        </div>
+
+                        <div style={ { borderRadius: 24, overflow: "hidden", width: 220, height: 150,
+                                boxShadow: "var(--shadow)" } }>
+                            <WorkshopScene cluttered={ true } />
+                        </div>
+
+                        <div>
+                            <p style={ { margin: "0 0 4px", fontWeight: 700, fontSize: 15.5 } }>{ s.tagline }</p>
+                            <p style={ { margin: 0, color: "var(--ink-soft)", fontSize: 14, lineHeight: 1.55,
+                                    maxWidth: 280 } }>{ s.splashDesc }</p>
+                        </div>
+                    </div>
+                    <button className="btn-primary" onClick={ () => go("language") }>{ s.getStarted }</button>
+                </ScreenShell>
+            );
+        }
+
+        function LanguagePick({ go, lang, setLang }) {
+            const s = useStrings();
+            const langs = [
+                { code: "en", label: "English" },
+                { code: "hi", label: "हिंदी" },
+                { code: "bn", label: "বাংলা" },
+                { code: "ta", label: "தமிழ்" },
+                { code: "te", label: "తెలుగు" },
+                { code: "mr", label: "मराठी" }
+            ];
+            return (
+                <ScreenShell>
+                    <Header title={ s.chooseLang } sub={ s.langSub } />
+                    <div style={ { display: "flex", flexDirection: "column", gap: 10, flex: 1 } }>
+                        { langs.map(l => (
+                            <button key={ l.code } onClick={ () => setLang(l.code) }
+                                className="card" style={ { textAlign: "left", display: "flex", justifyContent: "space-between",
+                                    alignItems: "center", border: lang === l.code ? "2px solid var(--bamboo)" :
+                                    "1px solid var(--line)", background: lang === l.code ? "#EEF3E9" : "var(--card)" } }>
+                                <span style={ { fontWeight: 700, fontSize: 16 } }>{ l.label }</span>
+                                { lang === l.code && <span style={ { width: 22, height: 22, borderRadius: "50%",
+                                        background: "var(--bamboo)", display: "flex", alignItems: "center",
+                                        justifyContent: "center" } }><Icon name="check" size={ 13 } color="#fff" /></span> }
+                            </button>
+                        )) }
+                    </div>
+                    <button className="btn-primary" style={ { marginTop: 16 } } onClick={ () => go("role") }>{ s
+                        .continue }</button>
+                </ScreenShell>
+            );
+        }
+
+        function RolePick({ go }) {
+            const s = useStrings();
+            const [role, setRole] = useState("artisan");
+            return (
+                <ScreenShell>
+                    <Header title={ s.roleTitle } sub={ s.roleSub } />
+                    <div style={ { display: "flex", flexDirection: "column", gap: 14, flex: 1 } }>
+                        <button onClick={ () => setRole("artisan") } className="card" style={ { textAlign: "left",
+                                padding: 22, border: role === "artisan" ? "2px solid var(--bamboo)" :
+                                "1px solid var(--line)", background: role === "artisan" ? "#EEF3E9" : "var(--card)" } }>
+                            <div style={ { display: "flex", alignItems: "center", gap: 14 } }>
+                                <div style={ { width: 52, height: 52, borderRadius: 14, background: "var(--bamboo)",
+                                        display: "flex", alignItems: "center", justifyContent: "center" } }><Icon
+                                        name="box" color="#fff" size={ 26 } /></div>
+                                <div>
+                                    <div style={ { fontWeight: 800, fontSize: 17 } }>{ s.artisan }</div>
+                                    <div style={ { fontSize: 13.5, color: "var(--ink-soft)" } }>{ s.artisanDesc }</div>
+                                </div>
+                            </div>
+                        </button>
+                        <button onClick={ () => setRole("buyer") } className="card" style={ { textAlign: "left",
+                                padding: 22, border: role === "buyer" ? "2px solid var(--bamboo)" :
+                                "1px solid var(--line)", background: role === "buyer" ? "#EEF3E9" : "var(--card)" } }>
+                            <div style={ { display: "flex", alignItems: "center", gap: 14 } }>
+                                <div style={ { width: 52, height: 52, borderRadius: 14, background: "var(--clay)",
+                                        display: "flex", alignItems: "center", justifyContent: "center" } }><Icon
+                                        name="users" color="#fff" size={ 26 } /></div>
+                                <div>
+                                    <div style={ { fontWeight: 800, fontSize: 17 } }>{ s.buyer }</div>
+                                    <div style={ { fontSize: 13.5, color: "var(--ink-soft)" } }>{ s.buyerDesc }</div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                    <button className="btn-primary" onClick={ () => go("profile") }>{ s.continueAs } { role === "artisan" ?
+                            s.artisan : s.buyer }</button>
+                </ScreenShell>
+            );
+        }
+
+        function ProfileSetup({ go, back }) {
+            const s = useStrings();
+            const [listening, setListening] = useState(false);
+            return (
+                <ScreenShell>
+                    <Header title={ s.profileTitle } sub={ s.profileSub } onBack={ back } />
+                    <div className="card" style={ { display: "flex", gap: 14, alignItems: "center", marginBottom: 16 } }>
+                        <MeeraPortrait size={ 72 } />
+                        <div>
+                            <div style={ { fontWeight: 800, fontSize: 17 } }>{ s.artisanName }</div>
+                            <div style={ { fontSize: 13, color: "var(--ink-soft)" } }>{ s.artisanLocation }</div>
+                        </div>
+                    </div>
+                    <div style={ { display: "flex", flexDirection: "column", gap: 12, marginBottom: 16 } }>
+                        <div>
+                            <div className="field-label">{ s.craftLabel }</div>
+                            <input type="text" defaultValue={ s.artisanCraft } />
+                        </div>
+                        <div>
+                            <div className="field-label">{ s.experienceLabel }</div>
+                            <input type="text" defaultValue={ s.artisanExperience } />
+                        </div>
+                    </div>
+                    <button className="card" onClick={ () => setListening(l => !l) } style={ { display: "flex",
+                            alignItems: "center", gap: 12, border: listening ? "1.5px solid var(--clay)" :
+                            "1px solid var(--line)", marginBottom: 16 } }>
+                        <div className="mic-btn" style={ { width: 44, height: 44 } }>
+                            { listening && <><span className="mic-pulse" style={ { inset: -8 } }></span></> }
+                            <Icon name="mic" color="#fff" size={ 18 } />
+                        </div>
+                        <div style={ { textAlign: "left" } }>
+                            <div style={ { fontWeight: 700, fontSize: 14 } }>{ listening ? s.listening : s.orSpeak }</div>
+                            <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>{ listening ?
+                                '"I have been weaving bamboo for fourteen years…"' : s.tapMicProfile }</div>
+                        </div>
+                    </button>
+                    <div style={ { flex: 1 } }></div>
+                    <button className="btn-primary" onClick={ () => go("home") }>{ s.createBusiness }</button>
+                </ScreenShell>
+            );
+        }
+
+        // ---------- HOME ----------
+        function Home({ go, productPublished }) {
+            const s = useStrings();
+            const product = useProduct();
+            return (
+                <ScreenShell>
+                    <div style={ { display: "flex", alignItems: "center", justifyContent: "space-between",
+                            marginBottom: 18 } }>
+                        <div>
+                            <div style={ { fontSize: 13, color: "var(--ink-soft)", fontWeight: 700 } }>{ s.goodMorning }</div>
+                            <h1 className="serif" style={ { margin: 0, fontSize: 24, fontWeight: 600 } }>{ s.artisanName }</h1>
+                        </div>
+                        <MeeraPortrait size={ 52 } />
+                    </div>
+
+                    <button className="btn-primary" style={ { display: "flex", alignItems: "center", justifyContent: "center",
+                            gap: 8, marginBottom: 18 } } onClick={ () => go("addStart") }>
+                        <span style={ { fontSize: 20, lineHeight: 0 } }>+</span> { s.addProduct.replace(/\+ /, '') }
+                    </button>
+
+                    <div style={ { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginBottom: 18 } }>
+                        { [
+                            [s.myProducts, "12"],
+                            [s.orders, "4"],
+                            [s.myIncome, "₹46,000"]
+                        ].map(([l, v]) => (
+                            <div key={ l } className="card" style={ { padding: 14, textAlign: "center" } }>
+                                <div className="serif" style={ { fontSize: 19, fontWeight: 600,
+                                        color: "var(--bamboo-deep)" } }>{ v }</div>
+                                <div style={ { fontSize: 11.5, color: "var(--ink-soft)", fontWeight: 700,
+                                        marginTop: 2 } }>{ l }</div>
+                            </div>
+                        )) }
+                    </div>
+
+                    <button className="card" onClick={ () => go("copilot") } style={ { textAlign: "left", display: "flex",
+                            gap: 12, alignItems: "center", marginBottom: 18, background: "linear-gradient(135deg,#EFF5EA,#F7EFDA)" } }>
+                        <div style={ { width: 44, height: 44, borderRadius: 12, background: "var(--bamboo)", display: "flex",
+                                alignItems: "center", justifyContent: "center", flex: "0 0 44px" } }>
+                            <Icon name="sparkle" color="#fff" size={ 20 } />
+                        </div>
+                        <div>
+                            <div style={ { fontWeight: 800, fontSize: 14.5 } }>{ s.askShilpSetu }</div>
+                            <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>{ s.askExample }</div>
+                        </div>
+                    </button>
+
+                    {productPublished && (
+                        <>
+                            <div className="field-label" style={ { marginBottom: 8 } }>{ s.yourProducts }</div>
+                            <button className="card" style={ { display: "flex", gap: 12, alignItems: "center", textAlign: "left" } }
+                                onClick={ () => go("live") }>
+                                <div style={ { width: 56, height: 56, borderRadius: 12, overflow: "hidden", flex: "0 0 56px" } }>
+                                    <ProductImage size={ 56 } /></div>
+                                <div style={ { flex: 1 } }>
+                                    <div style={ { fontWeight: 700, fontSize: 14 } }>{ product.name }</div>
+                                    <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>{ s.price } · { s.stock }</div>
+                                </div>
+                                <span className="tag live">{ s.live }</span>
+                            </button>
+                        </>
+                    )}
+                </ScreenShell>
+            );
+        }
+
+        function ProductsTab({ go, productPublished }) {
+            const s = useStrings();
+            const product = useProduct();
+            return (
+                <ScreenShell>
+                    <Header title={ s.productsTab } sub={ s.productsSub } />
+                    {productPublished && (
+                        <button className="card" style={ { display: "flex", gap: 12, alignItems: "center", textAlign: "left",
+                                marginBottom: 12 } } onClick={ () => go("live") }>
+                            <div style={ { width: 56, height: 56, borderRadius: 12, overflow: "hidden", flex: "0 0 56px" } }>
+                                <ProductImage size={ 56 } /></div>
+                            <div style={ { flex: 1 } }>
+                                <div style={ { fontWeight: 700, fontSize: 14 } }>{ product.name }</div>
+                                <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>{ s.price } · 12 in stock · 3 enquiries
+                                </div>
+                            </div>
+                            <span className="tag live">{ s.live }</span>
+                        </button>
+                    )}
+                    <button className="btn-secondary" onClick={ () => go("addStart") }>{ s.addAnother }</button>
+                </ScreenShell>
+            );
+        }
+
+        function BuyersTab({ go }) {
+            const s = useStrings();
+            return (
+                <ScreenShell>
+                    <Header title={ s.buyersTab } sub={ s.buyersSub } />
+                    <BuyerCard name={ s.buyer1Name } match={ 94 } matchLabel={ s.buyer1Match } color="var(--bamboo)" onClick={ () =>
+                            go("buyerDetail") } />
+                    <div style={ { height: 10 } } />
+                    <BuyerCard name={ s.buyer2Name } match={ 88 } matchLabel={ s.buyer2Match } color="var(--clay)" onClick={ () =>
+                            go("buyerMatch") } />
+                    <div style={ { height: 10 } } />
+                    <BuyerCard name={ s.buyer3Name } match={ 84 } matchLabel={ s.buyer3Match } color="var(--teal)" onClick={ () =>
+                            go("buyerMatch") } />
+                </ScreenShell>
+            );
+        }
+
+        function BusinessTab({ go }) {
+            const s = useStrings();
+            return (
+                <ScreenShell>
+                    <Header title={ s.businessTab } sub={ s.businessSub } />
+                    <div style={ { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 16 } }>
+                        { [
+                            [s.enquiries, "12"],
+                            [s.orders, "4"],
+                            [s.sales, "₹46,000"],
+                            [s.bestSeller, "Bamboo Basket"]
+                        ].map(([l, v]) => (
+                            <div key={ l } className="card" style={ { padding: 14 } }>
+                                <div className="serif" style={ { fontSize: 18, fontWeight: 600,
+                                        color: "var(--bamboo-deep)" } }>{ v }</div>
+                                <div style={ { fontSize: 11.5, color: "var(--ink-soft)", fontWeight: 700,
+                                        marginTop: 2 } }>{ l }</div>
+                            </div>
+                        )) }
+                    </div>
+                    <button className="card" onClick={ () => go("copilot") } style={ { textAlign: "left", display: "flex",
+                            gap: 12, alignItems: "center" } }>
+                        <div style={ { width: 44, height: 44, borderRadius: 12, background: "var(--bamboo)", display: "flex",
+                                alignItems: "center", justifyContent: "center", flex: "0 0 44px" } }><Icon name="sparkle"
+                                color="#fff" size={ 20 } /></div>
+                        <div>
+                            <div style={ { fontWeight: 800, fontSize: 14.5 } }>{ s.askBusiness }</div>
+                            <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>{ s.askBusinessSub }</div>
+                        </div>
+                    </button>
+                </ScreenShell>
+            );
+        }
+
+        function ProfileTab({ go }) {
+            const s = useStrings();
+            const product = useProduct();
+            return (
+                <ScreenShell>
+                    <Header title={ s.profileTab } />
+                    <div className="card" style={ { display: "flex", gap: 14, alignItems: "center", marginBottom: 16 } }>
+                        <MeeraPortrait size={ 72 } />
+                        <div>
+                            <div style={ { fontWeight: 800, fontSize: 17 } }>{ s.artisanName }</div>
+                            <div style={ { fontSize: 13, color: "var(--ink-soft)" } }>{ s.artisanLocation }</div>
+                            <div style={ { fontSize: 13, color: "var(--ink-soft)" } }>{ s.artisanCraft } · { s.artisanExperience }</div>
+                        </div>
+                    </div>
+                    <div className="card" style={ { marginBottom: 12 } }>
+                        <div className="field-label">{ s.businessSummary }</div>
+                        <p style={ { margin: 0, fontSize: 14, lineHeight: 1.6, color: "var(--ink-soft)" } }>{ product
+                            .story }</p>
+                    </div>
+                    <button className="btn-secondary" onClick={ () => go("home") }>{ s.backToHome }</button>
+                </ScreenShell>
+            );
+        }
+
+        function BuyerCard({ name, match, matchLabel, color, onClick }) {
+            return (
+                <button className="card" onClick={ onClick } style={ { display: "flex", alignItems: "center", gap: 12,
+                        textAlign: "left", width: "100%" } }>
+                    <div className="match-ring" style={ { background: color } }>{ match }%</div>
+                    <div style={ { flex: 1 } }>
+                        <div style={ { fontWeight: 700, fontSize: 14.5 } }>{ name }</div>
+                        <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>{ matchLabel }</div>
+                    </div>
+                    <Icon name="arrow-right" size={ 16 } color="var(--ink-soft)" />
+                </button>
+            );
+        }
+
+        // ---------- ADD PRODUCT FLOW ----------
+        function AddProductStart({ go, back }) {
+            const s = useStrings();
+            return (
+                <ScreenShell>
+                    <Header title={ s.addProductTitle } sub={ s.addProductSub } onBack={ back } />
+                    <div style={ { display: "flex", flexDirection: "column", gap: 12, flex: 1 } }>
+                        <button className="card" onClick={ () => go("camera") } style={ { display: "flex", gap: 14,
+                                alignItems: "center", textAlign: "left", padding: 20 } }>
+                            <div style={ { width: 50, height: 50, borderRadius: 13, background: "var(--bamboo)",
+                                    display: "flex", alignItems: "center", justifyContent: "center", flex: "0 0 50px" } }>
+                                <Icon name="camera" color="#fff" size={ 24 } /></div>
+                            <div>
+                                <div style={ { fontWeight: 800, fontSize: 15.5 } }>{ s.takePhoto }</div>
+                                <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>{ s.takePhotoDesc }</div>
+                            </div>
+                        </button>
+                        <button className="card" onClick={ () => go("camera") } style={ { display: "flex", gap: 14,
+                                alignItems: "center", textAlign: "left", padding: 20, opacity: 0.75 } }>
+                            <div style={ { width: 50, height: 50, borderRadius: 13, background: "var(--clay)",
+                                    display: "flex", alignItems: "center", justifyContent: "center", flex: "0 0 50px" } }>
+                                <Icon name="box" color="#fff" size={ 22 } /></div>
+                            <div>
+                                <div style={ { fontWeight: 800, fontSize: 15.5 } }>{ s.chooseGallery }</div>
+                                <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>{ s.chooseGalleryDesc }</div>
+                            </div>
+                        </button>
+                        <button className="card" onClick={ () => go("voiceDescribe") } style={ { display: "flex", gap: 14,
+                                alignItems: "center", textAlign: "left", padding: 20, opacity: 0.75 } }>
+                            <div style={ { width: 50, height: 50, borderRadius: 13, background: "var(--teal)",
+                                    display: "flex", alignItems: "center", justifyContent: "center", flex: "0 0 50px" } }>
+                                <Icon name="mic" color="#fff" size={ 22 } /></div>
+                            <div>
+                                <div style={ { fontWeight: 800, fontSize: 15.5 } }>{ s.tellUs }</div>
+                                <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>{ s.tellUsDesc }</div>
+                            </div>
+                        </button>
+                    </div>
+                </ScreenShell>
+            );
+        }
+
+        // -------- CAMERA SCREEN ----------
+        function CameraScreen({ go, back }) {
+            const s = useStrings();
+            const [stage, setStage] = useState("frame");
+            const [count, setCount] = useState(3);
+
+            useEffect(() => {
+                if (stage === "counting") {
+                    if (count === 0) { setStage("flash");
+                        setTimeout(() => setStage("captured"), 400); return; }
+                    const t = setTimeout(() => setCount(c => c - 1), 700);
+                    return () => clearTimeout(t);
+                }
+            }, [stage, count]);
+
+            return (
+                <div className="fade-in" style={ { height: "100%", display: "flex", flexDirection: "column",
+                        background: "#161109" } }>
+                    <div style={ { flex: 1, position: "relative", overflow: "hidden" } }>
+                        { stage !== "captured" && (
+                            <img src="before.png" alt="Camera preview" style={ { width: "100%", height: "100%",
+                                    objectFit: "cover" } } />
+                        ) }
+                        { stage !== "captured" && (
+                            <div style={ { position: "absolute", inset: 24, border: "2.5px dashed rgba(255,255,255,.85)",
+                                    borderRadius: 18, pointerEvents: "none" } }></div>
+                        ) }
+                        { stage === "frame" && (
+                            <div style={ { position: "absolute", top: 16, left: 0, right: 0, textAlign: "center" } }>
+                                <span style={ { background: "rgba(0,0,0,.55)", color: "#fff", padding: "7px 14px",
+                                        borderRadius: 99, fontSize: 12.5, fontWeight: 700 } }>{ s.cameraFrame }</span>
+                            </div>
+                        ) }
+                        { stage === "counting" && (
+                            <div style={ { position: "absolute", inset: 0, display: "flex", alignItems: "center",
+                                    justifyContent: "center" } }>
+                                <div style={ { width: 96, height: 96, borderRadius: "50%", background: "rgba(0,0,0,.55)",
+                                        color: "#fff", fontSize: 44, fontWeight: 800, display: "flex", alignItems: "center",
+                                        justifyContent: "center" } }>{ count }</div>
+                            </div>
+                        ) }
+                        { stage === "flash" && <div className="flash"></div> }
+                        { stage === "captured" && (
+                            <div style={ { width: "100%", height: "100%", display: "flex", flexDirection: "column",
+                                    alignItems: "center", justifyContent: "center", background: "#161109" } }>
+                                <img src="before.png" alt="Captured" style={ { width: "80%", height: "80%",
+                                        objectFit: "contain", borderRadius: 16 } } />
+                                <span style={ { background: "rgba(0,0,0,.6)", color: "#fff", padding: "7px 14px",
+                                        borderRadius: 99, fontSize: 12.5, fontWeight: 700, marginTop: 10 } }>{ s
+                                        .photoCaptured }</span>
+                            </div>
+                        ) }
+                    </div>
+                    <div style={ { padding: "18px 22px 26px", background: "#161109" } }>
+                        { stage !== "captured" ? (
+                            <div style={ { display: "flex", alignItems: "center", justifyContent: "space-between" } }>
+                                <div style={ { width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,.12)",
+                                        display: "flex", alignItems: "center", justifyContent: "center" } }><Icon
+                                        name="flash" color="#fff" size={ 18 } /></div>
+                                <button onClick={ () => stage === "frame" && setStage("counting") } style={ { width: 74,
+                                        height: 74, borderRadius: "50%", background: "#fff",
+                                        border: "5px solid rgba(255,255,255,.35)" } }></button>
+                                <div style={ { width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,.12)",
+                                        display: "flex", alignItems: "center", justifyContent: "center" } }><Icon
+                                        name="flip" color="#fff" size={ 18 } /></div>
+                            </div>
+                        ) : (
+                            <div style={ { display: "flex", flexDirection: "column", gap: 10 } }>
+                                <button className="btn-primary" onClick={ () => go("enhance") }>{ s
+                                    .useThisPhoto }</button>
+                                <button className="btn-ghost" style={ { color: "#EFE7D2", textAlign: "center" } } onClick={ () => {
+                                        setStage("frame");
+                                        setCount(3);
+                                    } }>{ s.retake }</button>
+                            </div>
+                        ) }
+                    </div>
+                </div>
+            );
+        }
+
+        // ---------- ENHANCE SCREEN ----------
+        function EnhanceScreen({ go, back }) {
+            const s = useStrings();
+            const [phase, setPhase] = useState("processing");
+            const steps = [s.step1, s.step2, s.step3, s.step4, s.step5, s.step6];
+            const [pos, setPos] = useState(50);
+            const dragging = useRef(false);
+
+            return (
+                <ScreenShell>
+                    <Header title={ phase === "processing" ? s.aiEnhance : s.aiEnhanceDone } tagText={ s.aiAtWork }
+                        tagType="ai" onBack={ back } />
+                    { phase === "processing" ? (
+                        <>
+                            <div style={ { borderRadius: 18, overflow: "hidden", marginBottom: 18,
+                                    border: "1px solid var(--line)" } }>
+                                <img src="before.png" alt="Before" style={ { width: "100%", height: "100%",
+                                        objectFit: "cover" } } />
+                            </div>
+                            <Checklist items={ steps } onDone={ () => setPhase("done") } />
+                        </>
+                    ) : (
+                        <>
+                            <div className="slider-wrap" style={ { height: 200, marginBottom: 14, userSelect: "none" } }
+                                onMouseMove={ e => { if (!dragging.current) return; const r = e.currentTarget
+                                        .getBoundingClientRect();
+                                    setPos(Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100))); } }
+                                onMouseDown={ () => dragging.current = true } onMouseUp={ () => dragging.current = false }
+                                onMouseLeave={ () => dragging.current = false }
+                                onTouchMove={ e => { const r = e.currentTarget.getBoundingClientRect();
+                                    const x = e.touches[0].clientX;
+                                    setPos(Math.min(100, Math.max(0, ((x - r.left) / r.width) * 100))); } }>
+                                <div style={ { position: "absolute", inset: 0 } }>
+                                    <img src="before.png" alt="Before" style={ { width: "100%", height: "100%",
+                                            objectFit: "cover" } } />
+                                </div>
+                                <div style={ { position: "absolute", inset: 0, clipPath: `inset(0 0 0 ${pos}%)` } }>
+                                    <img src="after.png" alt="After" style={ { width: "100%", height: "100%",
+                                            objectFit: "cover" } } />
+                                </div>
+                                <div className="slider-handle" style={ { left: pos + "%" } }></div>
+                                <div className="slider-grip" style={ { left: pos + "%" } }><Icon name="arrow-left"
+                                        size={ 12 } /><Icon name="arrow-right" size={ 12 } /></div>
+                                <span style={ { position: "absolute", top: 8, left: 8, background: "rgba(0,0,0,.55)",
+                                        color: "#fff", fontSize: 10.5, fontWeight: 700, padding: "3px 8px",
+                                        borderRadius: 99 } }>{ s.beforeLabel }</span>
+                                <span style={ { position: "absolute", top: 8, right: 8, background: "rgba(46,74,52,.85)",
+                                        color: "#fff", fontSize: 10.5, fontWeight: 700, padding: "3px 8px",
+                                        borderRadius: 99 } }>{ s.afterLabel }</span>
+                            </div>
+                            <p style={ { fontSize: 13.5, color: "var(--ink-soft)", lineHeight: 1.5,
+                                marginTop: 0 } }>{ s.beforeAfterDesc }</p>
+                        </>
+                    ) }
+                    <div style={ { flex: 1 } }></div>
+                    { phase === "done" && (
+                        <div style={ { display: "flex", flexDirection: "column", gap: 10 } }>
+                            <button className="btn-primary" onClick={ () => go("voiceDescribe") }>{ s
+                                .useEnhanced }</button>
+                            <button className="btn-secondary" onClick={ () => go("camera") }>{ s.retakePhoto }</button>
+                        </div>
+                    ) }
+                </ScreenShell>
+            );
+        }
+
+        // ---------- VOICE DESCRIPTION ----------
+        const DESC_LINES_EN = [
+            "This is a bamboo storage basket.",
+            "I make it by hand using natural bamboo.",
+            "It takes about three days to complete.",
+            "I learned this craft from my mother."
+        ];
+        const DESC_LINES_HI = [
+            "यह एक बाँस स्टोरेज बास्केट है।",
+            "मैं इसे प्राकृतिक बाँस का उपयोग करके हाथ से बनाती हूँ।",
+            "इसे पूरा करने में लगभग तीन दिन लगते हैं।",
+            "मैंने यह शिल्प अपनी माँ से सीखा।"
+        ];
+
+        function useRecorder(lines, onFinish, msPerLine = 1500) {
+            const [seconds, setSeconds] = useState(0);
+            const [shownLines, setShownLines] = useState(0);
+            useEffect(() => {
+                const timer = setInterval(() => setSeconds(s => s + 1), 1000);
+                return () => clearInterval(timer);
+            }, []);
+            useEffect(() => {
+                if (shownLines >= lines.length) { const t = setTimeout(onFinish, 700); return () => clearTimeout(t); }
+                const t = setTimeout(() => setShownLines(s => s + 1), msPerLine);
+                return () => clearTimeout(t);
+            }, [shownLines]);
+            return { seconds, shownLines };
+        }
+
+        function VoiceDescribe({ go, back }) {
+            const s = useStrings();
+            const { lang } = useContext(LanguageContext);
+            const lines = lang === "hi" ? DESC_LINES_HI : DESC_LINES_EN;
+            const [phase, setPhase] = useState("idle");
+            return (
+                <ScreenShell>
+                    <Header title={ s.tellProduct } sub={ s.tellProductSub } onBack={ back } />
+                    <div style={ { borderRadius: 16, overflow: "hidden", marginBottom: 18, height: 130 } }>
+                        <ProductImage size={ 130 } />
+                    </div>
+                    { phase === "idle" && (
+                        <div style={ { flex: 1, display: "flex", flexDirection: "column", alignItems: "center",
+                                justifyContent: "center", gap: 16 } }>
+                            <button className="mic-btn" onClick={ () => setPhase("rec") }>
+                                <Icon name="mic" color="#fff" size={ 34 } />
+                            </button>
+                            <div style={ { fontWeight: 700, fontSize: 15 } }>{ s.tapAndSpeak }</div>
+                        </div>
+                    ) }
+                    { phase === "rec" && <RecordingPanel lines={ lines } onFinish={ () => setPhase("done") } /> }
+                    { phase === "done" && (
+                        <div style={ { flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" } }>
+                            <div className="tag" style={ { marginBottom: 10 } }>{ s.recordingComplete }</div>
+                            <div className="card" style={ { fontSize: 14.5, lineHeight: 1.6 } }>{ lines.join(" ") }</div>
+                        </div>
+                    ) }
+                    <div style={ { flex: phase === "idle" ? 0 : 1 } }></div>
+                    { phase === "done" && <button className="btn-primary" onClick={ () => go("understandVoice") }>{ s
+                            .continue }</button> }
+                </ScreenShell>
+            );
+        }
+
+        function RecordingPanel({ lines, onFinish }) {
+            const { seconds, shownLines } = useRecorder(lines, onFinish);
+            const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
+            const ss = String(seconds % 60).padStart(2, "0");
+            const s = useStrings();
+            return (
+                <div style={ { flex: 1, display: "flex", flexDirection: "column", gap: 16 } }>
+                    <div style={ { display: "flex", flexDirection: "column", alignItems: "center", gap: 10 } }>
+                        <div className="mic-btn" style={ { width: 74, height: 74 } }>
+                            <span className="mic-pulse"></span><span className="mic-pulse p2"></span>
+                            <Icon name="mic" color="#fff" size={ 26 } />
+                        </div>
+                        <div style={ { fontWeight: 800, fontSize: 13.5, color: "var(--clay)" } }>{ s.listening } { mm }:{ ss }</div>
+                        <Waveform />
+                    </div>
+                    <div className="card" style={ { minHeight: 110 } }>
+                        <div className="field-label">Live transcript</div>
+                        { lines.slice(0, shownLines).map((l, i) => (
+                            <p key={ i } className="fade-in" style={ { margin: "0 0 6px", fontSize: 14.5,
+                                    lineHeight: 1.5 } }>{ l }</p>
+                        )) }
+                        { shownLines < lines.length &&
+                            <span style={ { display: "inline-block", width: 8, height: 16, background: "var(--clay)",
+                                    animation: "pulse 1s infinite" } }></span> }
+                    </div>
+                </div>
+            );
+        }
+
+        function UnderstandVoice({ go, back }) {
+            const s = useStrings();
+            const steps = [s.step1, s.step2, s.step3, s.step4, s.step5, s.step6];
+            const [done, setDone] = useState(false);
+            const { lang } = useContext(LanguageContext);
+            const lines = lang === "hi" ? DESC_LINES_HI : DESC_LINES_EN;
+            return (
+                <ScreenShell>
+                    <Header title={ s.understandingProduct } tagText={ s.aiAtWork } tagType="ai" onBack={ back } />
+                    <div className="card" style={ { marginBottom: 16 } }>
+                        <div className="field-label">{ s.whatMeeraSaid }</div>
+                        <p style={ { margin: 0, fontSize: 14, lineHeight: 1.6, color: "var(--ink-soft)" } }>{ lines
+                            .join(" ") }</p>
+                    </div>
+                    <Checklist items={ steps } onDone={ () => setDone(true) } />
+                    <div style={ { flex: 1 } }></div>
+                    { done && <button className="btn-primary" onClick={ () => go("productDetails") }>{ s
+                        .continue }</button> }
+                </ScreenShell>
+            );
+        }
+
+        function ProductDetails({ go, back }) {
+            const s = useStrings();
+            const product = useProduct();
+            const [isEditing, setIsEditing] = useState(false);
+            const [data, setData] = useState({
+                name: product.name,
+                material: product.material,
+                craft: product.craft,
+                color: product.color,
+                pattern: product.pattern,
+                origin: product.origin,
+                prodTime: product.prodTime
+            });
+
+            const rows = [
+                ["Product", "name"],
+                ["Material", "material"],
+                ["Craft", "craft"],
+                ["Color", "color"],
+                ["Pattern", "pattern"],
+                ["Origin", "origin"],
+                ["Production Time", "prodTime"]
+            ];
+
+            const handleSave = () => {
+                setIsEditing(false);
+            };
+
+            return (
+                <ScreenShell>
+                    <ProgressDots step={ 2 } total={ 6 } />
+                    <Header title={ s.productDetailsReady } tagText={ s.aiGeneratedDetails } tagType="ai" onBack={ back } />
+                    <div style={ { borderRadius: 16, overflow: "hidden", marginBottom: 16, height: 140 } }>
+                        <ProductImage size={ 140 } />
+                    </div>
+                    <div className="card" style={ { marginBottom: 16 } }>
+                        { rows.map(([label, key], i) => (
+                            <div key={ key } style={ { display: "flex", justifyContent: "space-between", padding: "9px 0",
+                                    borderTop: i === 0 ? "none" : "1px solid var(--line)", alignItems: "center" } }>
+                                <span style={ { fontSize: 13, color: "var(--ink-soft)", fontWeight: 700 } }>{ label }</span>
+                                { isEditing ? (
+                                    <input type="text" value={ data[key] } onChange={ e => setData({ ...data, [key]: e
+                                            .target.value }) }
+                                        style={ { width: "55%", textAlign: "right", padding: "6px 10px", borderRadius: 10,
+                                            border: "1.5px solid var(--gold)", fontSize: 13.5, fontWeight: 700,
+                                            background: "#FFFDF5" } } />
+                                ) : (
+                                    <span style={ { fontSize: 13.5, fontWeight: 700, textAlign: "right" } }>{ data[key] }</span>
+                                ) }
+                            </div>
+                        )) }
+                    </div>
+                    <div style={ { flex: 1 } }></div>
+                    <div style={ { display: "flex", flexDirection: "column", gap: 10 } }>
+                        { isEditing ? (
+                            <div style={ { display: "flex", gap: 10 } }>
+                                <button className="btn-primary" onClick={ handleSave } style={ { flex: 1 } }>{ s
+                                        .saveChanges }</button>
+                                <button className="btn-secondary" onClick={ () => setIsEditing(false) } style={ { flex: 1 } }>{ s
+                                        .cancel }</button>
+                            </div>
+                        ) : (
+                            <>
+                                <button className="btn-primary" onClick={ () => go("aiDescription") }>{ s
+                                    .looksGood }</button>
+                                <button className="btn-secondary" style={ { display: "flex", alignItems: "center",
+                                        justifyContent: "center", gap: 6 } } onClick={ () => setIsEditing(true) }>
+                                    <Icon name="edit" size={ 15 } /> { s.editDetails }
+                                </button>
+                            </>
+                        ) }
+                    </div>
+                </ScreenShell>
+            );
+        }
+
+        function AIDescription({ go, back }) {
+            const s = useStrings();
+            const product = useProduct();
+            const [isEditing, setIsEditing] = useState(false);
+            const [desc, setDesc] = useState(product.description);
+
+            const handleSave = () => {
+                setIsEditing(false);
+            };
+
+            return (
+                <ScreenShell>
+                    <ProgressDots step={ 3 } total={ 6 } />
+                    <Header title={ s.productDescription } tagText={ s.aiGeneratedDesc } tagType="ai" onBack={ back } />
+                    <div className="card" style={ { marginBottom: 16 } }>
+                        { isEditing ? (
+                            <textarea className="inline-edit-textarea" value={ desc } onChange={ e => setDesc(e.target
+                                    .value) } rows={ 6 } />
+                        ) : (
+                            <p style={ { margin: 0, fontSize: 14.5, lineHeight: 1.7 } }>{ desc }</p>
+                        ) }
+                    </div>
+                    <div style={ { flex: 1 } }></div>
+                    <div style={ { display: "flex", flexDirection: "column", gap: 10 } }>
+                        { isEditing ? (
+                            <div style={ { display: "flex", gap: 10 } }>
+                                <button className="btn-primary" onClick={ handleSave } style={ { flex: 1 } }>{ s
+                                        .saveDescription }</button>
+                                <button className="btn-secondary" onClick={ () => setIsEditing(false) } style={ { flex: 1 } }>{ s
+                                        .cancel }</button>
+                            </div>
+                        ) : (
+                            <>
+                                <button className="btn-primary" onClick={ () => go("craftStoryIntro") }>{ s
+                                        .useDescription }</button>
+                                <button className="btn-secondary" style={ { display: "flex", alignItems: "center",
+                                        justifyContent: "center", gap: 6 } } onClick={ () => setIsEditing(true) }>
+                                    <Icon name="edit" size={ 15 } /> { s.edit }
+                                </button>
+                            </>
+                        ) }
+                    </div>
+                </ScreenShell>
+            );
+        }
+
+        function CraftStoryIntro({ go, back }) {
+            const s = useStrings();
+            return (
+                <ScreenShell>
+                    <ProgressDots step={ 4 } total={ 6 } />
+                    <Header title={ s.craftStoryIntro } sub={ s.craftStorySub } tagText={ s.aiCraftStoryteller }
+                        tagType="ai" onBack={ back } />
+                    <div style={ { flex: 1, display: "flex", flexDirection: "column", alignItems: "center",
+                            justifyContent: "center", gap: 16 } }>
+                        <MeeraPortrait size={ 110 } />
+                        <button className="btn-clay" style={ { width: "auto", padding: "14px 26px", display: "flex",
+                                alignItems: "center", gap: 10 } } onClick={ () => go("craftStoryVoice") }>
+                            <Icon name="mic" size={ 18 } color="#fff" /> { s.tapSpeakStory }
+                        </button>
+                    </div>
+                </ScreenShell>
+            );
+        }
+
+        const STORY_LINES_EN = [
+            "My mother taught me bamboo weaving when I was young.",
+            "I have been making these baskets for fourteen years.",
+            "Every basket is made by hand."
+        ];
+        const STORY_LINES_HI = [
+            "मेरी माँ ने मुझे कम उम्र में बाँस बुनाई सिखाई।",
+            "मैं चौदह वर्षों से ये बास्केट बना रही हूँ।",
+            "हर बास्केट हाथ से बनाई जाती है।"
+        ];
+
+        function CraftStoryVoice({ go, back }) {
+            const s = useStrings();
+            const { lang } = useContext(LanguageContext);
+            const lines = lang === "hi" ? STORY_LINES_HI : STORY_LINES_EN;
+            return (
+                <ScreenShell>
+                    <Header title={ s.recordingStory } tagText={ s.aiCraftStoryteller } tagType="ai" onBack={ back } />
+                    <RecordingPanel lines={ lines } onFinish={ () => go("craftStoryProcess") } />
+                </ScreenShell>
+            );
+        }
+
+        function CraftStoryProcess({ go, back }) {
+            const s = useStrings();
+            const steps = [s.step1, s.step2, s.step3, s.step4, s.step5, s.step6];
+            const { lang } = useContext(LanguageContext);
+            const lines = lang === "hi" ? STORY_LINES_HI : STORY_LINES_EN;
+            return (
+                <ScreenShell>
+                    <Header title={ s.creatingStory } tagText={ s.aiAtWork } tagType="ai" onBack={ back } />
+                    <div className="card" style={ { marginBottom: 16 } }>
+                        <div className="field-label">{ s.whatMeeraSaid }</div>
+                        <p style={ { margin: 0, fontSize: 14, lineHeight: 1.6, color: "var(--ink-soft)" } }>{ lines
+                            .join(" ") }</p>
+                    </div>
+                    <Checklist items={ steps } onDone={ () => setTimeout(() => go("craftStoryReveal"), 500) } />
+                </ScreenShell>
+            );
+        }
+
+        function CraftStoryReveal({ go, back }) {
+            const s = useStrings();
+            const product = useProduct();
+            const [isEditing, setIsEditing] = useState(false);
+            const [story, setStory] = useState(product.story);
+
+            const handleSave = () => {
+                setIsEditing(false);
+            };
+
+            return (
+                <ScreenShell>
+                    <ProgressDots step={ 4 } total={ 6 } />
+                    <Header title={ s.meerasCraftStory } tagText={ s.aiGeneratedCraftStory } tagType="ai" onBack={ back } />
+                    <div className="card" style={ { marginBottom: 16, background: "linear-gradient(155deg,#FBF4E6,#F3E7CE)" } }>
+                        <div style={ { display: "flex", gap: 10, alignItems: "center", marginBottom: 10 } }>
+                            <MeeraPortrait size={ 40 } />
+                            <div style={ { fontWeight: 800, fontSize: 14 } }>{ s.artisanName } · { s.artisanLocation }</div>
+                        </div>
+                        { isEditing ? (
+                            <textarea className="inline-edit-textarea" value={ story } onChange={ e => setStory(e.target
+                                    .value) } rows={ 6 } style={ { fontFamily: "'Fraunces',serif", fontStyle: "italic",
+                                    fontSize: 15.5 } } />
+                        ) : (
+                            <p className="serif" style={ { margin: 0, fontSize: 15.5, lineHeight: 1.7, fontStyle: "italic",
+                                    color: "var(--bamboo-deep)" } }>{ story }</p>
+                        ) }
+                    </div>
+                    <div style={ { flex: 1 } }></div>
+                    <div style={ { display: "flex", flexDirection: "column", gap: 10 } }>
+                        { isEditing ? (
+                            <div style={ { display: "flex", gap: 10 } }>
+                                <button className="btn-primary" onClick={ handleSave } style={ { flex: 1 } }>{ s
+                                        .saveStory }</button>
+                                <button className="btn-secondary" onClick={ () => setIsEditing(false) } style={ { flex: 1 } }>{ s
+                                        .cancel }</button>
+                            </div>
+                        ) : (
+                            <>
+                                <button className="btn-primary" onClick={ () => go("pricingInput") }>{ s
+                                    .addCraftStory }</button>
+                                <div style={ { display: "flex", gap: 10 } }>
+                                    <button className="btn-secondary" style={ { flex: 1 } } onClick={ () => setIsEditing(
+                                        true) }>{ s.editCraftStory }</button>
+                                    <button className="btn-secondary" style={ { flex: 1 } } onClick={ () => go(
+                                        "pricingInput") }>{ s.skipCraftStory }</button>
+                                </div>
+                            </>
+                        ) }
+                    </div>
+                </ScreenShell>
+            );
+        }
+
+        // ---------- PRICING ----------
+        function PricingInput({ go, back }) {
+            const s = useStrings();
+            const [listening, setListening] = useState(false);
+            const [extracted, setExtracted] = useState(null);
+            const [costs, setCosts] = useState({
+                material: "₹450",
+                other: "₹100",
+                time: "3 days"
+            });
+
+            const handleVoiceExtract = () => {
+                setListening(true);
+                setTimeout(() => {
+                    setListening(false);
+                    setExtracted({
+                        material: "₹450",
+                        other: "₹100",
+                        time: "3 days"
+                    });
+                    setCosts({
+                        material: "₹450",
+                        other: "₹100",
+                        time: "3 days"
+                    });
+                }, 2500);
+            };
+
+            return (
+                <ScreenShell>
+                    <ProgressDots step={ 5 } total={ 6 } />
+                    <Header title={ s.pricingTitle } sub={ s.pricingSub } onBack={ back } />
+                    <div style={ { display: "flex", flexDirection: "column", gap: 14, marginBottom: 16 } }>
+                        { [
+                            [s.materialCost, "material", costs.material],
+                            [s.otherCosts, "other", costs.other],
+                            [s.productionTime, "time", costs.time]
+                        ].map(([label, key, val]) => (
+                            <div key={ key }>
+                                <div className="field-label">{ label }</div>
+                                <input type="text" value={ val } onChange={ e => setCosts({ ...costs, [key]: e.target
+                                        .value }) } style={ { flex: 1 } } />
+                            </div>
+                        )) }
+                    </div>
+                    { extracted && (
+                        <div className="card" style={ { marginBottom: 16, background: "#EEF3E9" } }>
+                            <div className="field-label">{ s.extractedCosts }</div>
+                            <div style={ { fontSize: 14, fontWeight: 600 } }>{ s.materialExtracted }{ costs.material }</div>
+                            <div style={ { fontSize: 14, fontWeight: 600 } }>{ s.otherExtracted }{ costs.other }</div>
+                            <div style={ { fontSize: 14, fontWeight: 600 } }>{ s.timeExtracted }{ costs.time }</div>
+                        </div>
+                    ) }
+                    <button className="card" onClick={ handleVoiceExtract } disabled={ listening } style={ { display: "flex",
+                            gap: 12, alignItems: "center", marginBottom: 16, opacity: listening ? 0.6 : 1 } }>
+                        <div className="mic-btn" style={ { width: 44, height: 44 } }>
+                            { listening && <><span className="mic-pulse" style={ { inset: -8 } }></span></> }
+                            <Icon name="mic" color="#fff" size={ 18 } />
+                        </div>
+                        <div style={ { textAlign: "left" } }>
+                            <div style={ { fontWeight: 700, fontSize: 14 } }>{ listening ? s.listening : s
+                                    .speakCosts }</div>
+                            <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>{ listening ?
+                                "Say: material cost 450, other 100, time 3 days" : "Tap to speak your costs" }</div>
+                        </div>
+                    </button>
+
+                    <div style={ { flex: 1 } }></div>
+                    <button className="btn-primary" onClick={ () => go("pricingProcess") }>{ s.suggestPrice }</button>
+                </ScreenShell>
+            );
+        }
+
+        function PricingProcess({ go, back }) {
+            const s = useStrings();
+            const steps = [s.step1, s.step2, s.step3, s.step4, s.step5, s.step6];
+            return (
+                <ScreenShell>
+                    <Header title={ s.calculatingPrice } tagText={ s.aiAtWork } tagType="ai" onBack={ back } />
+                    <Checklist items={ steps } speed={ 500 } onDone={ () => setTimeout(() => go("pricingReveal"), 500) } />
+                </ScreenShell>
+            );
+        }
+
+        function PricingReveal({ go, back }) {
+            const s = useStrings();
+            const product = useProduct();
+            const [isEditing, setIsEditing] = useState(false);
+            const [price, setPrice] = useState(product.suggestedPrice);
+            const [rangeLow, setRangeLow] = useState(product.rangeLow);
+            const [rangeHigh, setRangeHigh] = useState(product.rangeHigh);
+
+            const breakdown = [
+                ["Material", product.materialCost],
+                ["Other costs", product.otherCost],
+                ["Craft effort", 250],
+                ["Market signals", 150]
+            ];
+
+            const handleSave = () => {
+                setIsEditing(false);
+            };
+
+            return (
+                <ScreenShell>
+                    <ProgressDots step={ 5 } total={ 6 } />
+                    <Header title={ s.suggestedPrice } tagText={ s.aiEstimate } onBack={ back } />
+                    <div className="card" style={ { textAlign: "center", marginBottom: 16, padding: 26,
+                            background: "linear-gradient(155deg,#EFF5EA,#F7EFDA)" } }>
+                        <div style={ { fontSize: 13, fontWeight: 700, color: "var(--ink-soft)", marginBottom: 6 } }>{ s
+                                .suggestedPrice }</div>
+                        { isEditing ? (
+                            <div style={ { display: "flex", flexDirection: "column", gap: 10, alignItems: "center" } }>
+                                <input type="number" value={ price } onChange={ e => setPrice(Number(e.target.value)) }
+                                    style={ { width: "60%", textAlign: "center", fontSize: 32, fontWeight: 600,
+                                        padding: "8px 12px", borderRadius: 14, border: "1.5px solid var(--gold)",
+                                        background: "#FFFDF5", fontFamily: "'Fraunces',serif" } } />
+                                <div style={ { display: "flex", gap: 12, fontSize: 13, color: "var(--ink-soft)" } }>
+                                    <span>{ s.suggestedRange } ₹</span>
+                                    <input type="number" value={ rangeLow } onChange={ e => setRangeLow(Number(e.target
+                                            .value)) }
+                                        style={ { width: 70, textAlign: "center", padding: "4px 6px", borderRadius: 8,
+                                            border: "1.5px solid var(--gold)", fontSize: 13, background: "#FFFDF5" } } />
+                                    <span>– ₹</span>
+                                    <input type="number" value={ rangeHigh } onChange={ e => setRangeHigh(Number(e.target
+                                            .value)) }
+                                        style={ { width: 70, textAlign: "center", padding: "4px 6px", borderRadius: 8,
+                                            border: "1.5px solid var(--gold)", fontSize: 13, background: "#FFFDF5" } } />
+                                </div>
+                            </div>
+                        ) : (
+                            <>
+                                <div className="serif" style={ { fontSize: 40, fontWeight: 600,
+                                        color: "var(--bamboo-deep)" } }>₹{ price }</div>
+                                <div style={ { fontSize: 13, color: "var(--ink-soft)", marginTop: 6 } }>{ s
+                                        .suggestedRange } ₹{ rangeLow } – ₹{ rangeHigh }</div>
+                            </>
+                        ) }
+                    </div>
+                    <div className="card" style={ { marginBottom: 16 } }>
+                        <div className="field-label">{ s.howEstimated }</div>
+                        { breakdown.map(([l, v], i) => (
+                            <div key={ l } style={ { display: "flex", justifyContent: "space-between", padding: "8px 0",
+                                    borderTop: i === 0 ? "none" : "1px solid var(--line)" } }>
+                                <span style={ { fontSize: 13.5, color: "var(--ink-soft)" } }>{ l }</span>
+                                <span style={ { fontSize: 13.5, fontWeight: 700 } }>₹{ v }</span>
+                            </div>
+                        )) }
+                    </div>
+                    <div style={ { flex: 1 } }></div>
+                    <div style={ { display: "flex", flexDirection: "column", gap: 10 } }>
+                        { isEditing ? (
+                            <div style={ { display: "flex", gap: 10 } }>
+                                <button className="btn-primary" onClick={ handleSave } style={ { flex: 1 } }>{ s
+                                        .savePrice }</button>
+                                <button className="btn-secondary" onClick={ () => setIsEditing(false) } style={ { flex: 1 } }>{ s
+                                        .cancel }</button>
+                            </div>
+                        ) : (
+                            <>
+                                <button className="btn-primary" onClick={ () => go("finalReview") }>{ s.usePrice }{ price }</button>
+                                <button className="btn-secondary" onClick={ () => setIsEditing(true) }>{ s
+                                        .changePriceLabel }</button>
+                            </>
+                        ) }
+                    </div>
+                </ScreenShell>
+            );
+        }
+
+        // ---------- FINAL REVIEW ----------
+        function Row({ l, v }) {
+            return <div style={ { display: "flex", justifyContent: "space-between", padding: "7px 0" } }><span style={ {
+                        fontSize: 12.5, color: "var(--ink-soft)", fontWeight: 700 } }>{ l }</span><span style={ {
+                        fontSize: 13, fontWeight: 700 } }>{ v }</span></div>;
+        }
+
+        function FinalReview({ go, back }) {
+            const s = useStrings();
+            const product = useProduct();
+            const [isEditing, setIsEditing] = useState(false);
+            const [data, setData] = useState({
+                name: product.name,
+                material: product.material,
+                craft: product.craft,
+                origin: product.origin,
+                prodTime: product.prodTime,
+                stock: product.stock,
+                moq: product.moq,
+                price: product.suggestedPrice
+            });
+
+            const handleSave = () => {
+                setIsEditing(false);
+            };
+
+            const fields = [
+                ["Name", "name"],
+                ["Material", "material"],
+                ["Craft", "craft"],
+                ["Origin", "origin"],
+                ["Production", "prodTime"],
+                ["Stock", "stock"],
+                ["MOQ", "moq"]
+            ];
+
+            return (
+                <ScreenShell>
+                    <ProgressDots step={ 6 } total={ 6 } />
+                    <Header title={ s.reviewListing } sub={ s.reviewSub } onBack={ back } />
+                    <div className="card" style={ { marginBottom: 14, padding: 0, overflow: "hidden" } }>
+                        <div style={ { height: 150 } }><ProductImage size={ 150 } /></div>
+                        <div style={ { padding: 16 } }>
+                            { isEditing ? (
+                                <input type="text" value={ data.name } onChange={ e => setData({ ...data, name: e.target
+                                        .value }) }
+                                    style={ { fontSize: 17, fontWeight: 800, width: "100%", border: "1.5px solid var(--gold)",
+                                        borderRadius: 10, padding: "6px 10px", marginBottom: 6, background: "#FFFDF5" } } />
+                            ) : (
+                                <div style={ { fontWeight: 800, fontSize: 17, marginBottom: 2 } }>{ data.name }</div>
+                            ) }
+                            { isEditing ? (
+                                <input type="number" value={ data.price } onChange={ e => setData({ ...data, price: Number(e
+                                        .target.value) }) }
+                                    style={ { fontSize: 22, fontWeight: 600, width: "50%", border: "1.5px solid var(--gold)",
+                                        borderRadius: 10, padding: "4px 10px", marginBottom: 10, background: "#FFFDF5",
+                                        fontFamily: "'Fraunces',serif", color: "var(--bamboo-deep)" } } />
+                            ) : (
+                                <div className="serif" style={ { fontSize: 22, fontWeight: 600,
+                                        color: "var(--bamboo-deep)", marginBottom: 10 } }>₹{ data.price }</div>
+                            ) }
+                            { fields.map(([label, key]) => (
+                                <div key={ key } style={ { display: "flex", justifyContent: "space-between", padding: "7px 0",
+                                        borderTop: "1px solid var(--line)" } }>
+                                    <span style={ { fontSize: 12.5, color: "var(--ink-soft)", fontWeight: 700 } }>{ label }</span>
+                                    { isEditing ? (
+                                        <input type="text" value={ data[key] } onChange={ e => setData({ ...data, [key]: e
+                                                .target.value }) }
+                                            style={ { width: "50%", textAlign: "right", padding: "4px 8px", borderRadius: 8,
+                                                border: "1.5px solid var(--gold)", fontSize: 13, fontWeight: 700,
+                                                background: "#FFFDF5" } } />
+                                    ) : (
+                                        <span style={ { fontSize: 13, fontWeight: 700 } }>{ data[key] }</span>
+                                    ) }
+                                </div>
+                            )) }
+                        </div>
+                    </div>
+                    <div className="card" style={ { marginBottom: 14 } }>
+                        <div className="field-label">{ s.description }</div>
+                        { isEditing ? (
+                            <textarea className="inline-edit-textarea" value={ product.description }
+                                onChange={ e => { /* would update in real app */ } } rows={ 3 } />
+                        ) : (
+                            <p style={ { margin: 0, fontSize: 13.5, lineHeight: 1.6, color: "var(--ink-soft)" } }>{ product
+                                    .description }</p>
+                        ) }
+                    </div>
+                    <div className="card" style={ { marginBottom: 14 } }>
+                        <div className="field-label">{ s.craftStory }</div>
+                        { isEditing ? (
+                            <textarea className="inline-edit-textarea" value={ product.story }
+                                onChange={ e => { /* would update in real app */ } } rows={ 3 } />
+                        ) : (
+                            <p style={ { margin: 0, fontSize: 13.5, lineHeight: 1.6, color: "var(--ink-soft)" } }>{ product
+                                    .story }</p>
+                        ) }
+                    </div>
+                    <div className="tag ai" style={ { marginBottom: 16 } }><Icon name="sparkle" size={ 13 } /> { s
+                            .createdWithAI }</div>
+                    <div style={ { flex: 1 } }></div>
+                    <div style={ { display: "flex", flexDirection: "column", gap: 10 } }>
+                        { isEditing ? (
+                            <div style={ { display: "flex", gap: 10 } }>
+                                <button className="btn-primary" onClick={ handleSave } style={ { flex: 1 } }>{ s
+                                        .saveChanges }</button>
+                                <button className="btn-secondary" onClick={ () => setIsEditing(false) } style={ { flex: 1 } }>{ s
+                                        .cancel }</button>
+                            </div>
+                        ) : (
+                            <>
+                                <button className="btn-primary" onClick={ () => go("publishing") }>{ s
+                                    .publishProduct }</button>
+                                <button className="btn-secondary" onClick={ () => setIsEditing(true) }>{ s.edit }</button>
+                            </>
+                        ) }
+                    </div>
+                </ScreenShell>
+            );
+        }
+
+        function Publishing({ go, back, onPublishDone }) {
+            const s = useStrings();
+            const steps = [s.step1, s.step2, s.step3, s.step4, s.step5, s.step6];
+            const [done, setDone] = useState(false);
+
+            useEffect(() => {
+                if (done) {
+                    onPublishDone();
+                }
+            }, [done]);
+
+            return (
+                <ScreenShell>
+                    <Header title={ s.preparingListing } onBack={ back } />
+                    <div style={ { flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" } }>
+                        { !done ? (
+                            <>
+                                <div style={ { display: "flex", justifyContent: "center", marginBottom: 10 } }>
+                                    <div style={ { height: 110 } }><ProductImage size={ 110 } /></div>
+                                </div>
+                                <Checklist items={ steps } speed={ 480 } onDone={ () => setDone(true) } />
+                            </>
+                        ) : (
+                            <div style={ { textAlign: "center" } }>
+                                <div style={ { width: 74, height: 74, borderRadius: "50%", background: "var(--ok)",
+                                        display: "flex", alignItems: "center", justifyContent: "center",
+                                        margin: "0 auto 18px" } }><Icon name="check" size={ 34 } color="#fff" /></div>
+                                <h1 className="serif" style={ { fontSize: 24, fontWeight: 600, marginBottom: 8 } }>{ s
+                                        .productLive }</h1>
+                                <p style={ { color: "var(--ink-soft)", fontSize: 14 } }>{ s.buyersCanDiscover }</p>
+                            </div>
+                        ) }
+                    </div>
+                    { done && <button className="btn-primary" onClick={ () => go("live") }>{ s.continue }</button> }
+                </ScreenShell>
+            );
+        }
+
+        function LiveListing({ go, back }) {
+            const s = useStrings();
+            const product = useProduct();
+            return (
+                <ScreenShell>
+                    <Header title={ product.name } tagText={ s.live } tagType="live" onBack={ back } />
+                    <div style={ { borderRadius: 16, overflow: "hidden", marginBottom: 16, height: 160 } }>
+                        <ProductImage size={ 160 } />
+                    </div>
+                    <div className="serif" style={ { fontSize: 26, fontWeight: 600, color: "var(--bamboo-deep)",
+                            marginBottom: 14 } }>₹{ product.suggestedPrice }</div>
+                    <div style={ { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginBottom: 20 } }>
+                        { [
+                            ["Stock", "12"],
+                            ["Views", "0"],
+                            ["Enquiries", "0"]
+                        ].map(([l, v]) => (
+                            <div key={ l } className="card" style={ { textAlign: "center", padding: 14 } }>
+                                <div style={ { fontWeight: 800, fontSize: 17 } }>{ v }</div>
+                                <div style={ { fontSize: 11, color: "var(--ink-soft)", fontWeight: 700 } }>{ l }</div>
+                            </div>
+                        )) }
+                    </div>
+                    <div style={ { flex: 1 } }></div>
+                    <button className="btn-primary" onClick={ () => go("buyerMatch") }>{ s.findBuyers }</button>
+                </ScreenShell>
+            );
+        }
+
+        // ---------- BUYER MATCHING ----------
+        function BuyerMatch({ go, back }) {
+            const s = useStrings();
+            return (
+                <ScreenShell>
+                    <Header title={ s.foundBuyers } sub={ s.foundBuyersSub } onBack={ back } />
+                    <div style={ { display: "flex", flexDirection: "column", gap: 10, marginBottom: 16 } }>
+                        <BuyerCard name={ s.buyer1Name } match={ 94 } matchLabel={ s.buyer1Match } color="var(--bamboo)" onClick={ () =>
+                                go("buyerDetail") } />
+                        <BuyerCard name={ s.buyer2Name } match={ 88 } matchLabel={ s.buyer2Match } color="var(--clay)" />
+                        <BuyerCard name={ s.buyer3Name } match={ 84 } matchLabel={ s.buyer3Match } color="var(--teal)" />
+                    </div>
+                    <div className="card" style={ { marginBottom: 16 } }>
+                        <div className="field-label">{ s.whyBuyer }</div>
+                        { [s.interestedIn, s.lookingFor, s.targetPrice, s.interestedInCrafts].map(t => (
+                            <div key={ t } style={ { display: "flex", gap: 8, alignItems: "flex-start", padding: "6px 0" } }>
+                                <Icon name="check" size={ 15 } color="var(--ok)" /><span style={ { fontSize: 13.5 } }>{ t }</span>
+                            </div>
+                        )) }
+                    </div>
+                    <div style={ { flex: 1 } }></div>
+                    <button className="btn-primary" onClick={ () => go("buyerDetail") }>{ s.viewBestMatch }</button>
+                </ScreenShell>
+            );
+        }
+
+        function BuyerDetail({ go, back }) {
+            const s = useStrings();
+            const [sent, setSent] = useState(false);
+            const [isEditing, setIsEditing] = useState(false);
+            const [message, setMessage] = useState(
+                "Namaste. Thank you for your interest in my handmade bamboo baskets. I can provide 5 pieces at ₹950 each. Please let me know if you would like to discuss the order."
+            );
+
+            const handleSend = () => {
+                setSent(true);
+                setIsEditing(false);
+                setTimeout(() => { }, 3000);
+            };
+
+            return (
+                <ScreenShell>
+                    <Header title={ s.buyerDetailTitle } tagText={ s.matchTag } onBack={ back } />
+                    <div className="card" style={ { marginBottom: 16 } }>
+                        <div style={ { fontWeight: 700, fontSize: 14.5, marginBottom: 4 } }>{ s.interestedQty }</div>
+                        <div style={ { fontSize: 13, color: "var(--ink-soft)" } }>{ s.expectedPrice }</div>
+                    </div>
+                    <div className="tag ai" style={ { marginBottom: 10 } }><Icon name="sparkle" size={ 13 } /> { s
+                            .suggestedReply }</div>
+                    <div className="card" style={ { marginBottom: 16 } }>
+                        { isEditing ? (
+                            <textarea className="inline-edit-textarea" value={ message } onChange={ e => setMessage(e.target
+                                    .value) } rows={ 5 } />
+                        ) : (
+                            <p style={ { margin: 0, fontSize: 14, lineHeight: 1.6 } }>{ message }</p>
+                        ) }
+                    </div>
+                    <div style={ { flex: 1 } }></div>
+                    { !sent ? (
+                        <div style={ { display: "flex", flexDirection: "column", gap: 10 } }>
+                            { isEditing ? (
+                                <div style={ { display: "flex", gap: 10 } }>
+                                    <button className="btn-primary" onClick={ handleSend } style={ { flex: 1 } }><Icon
+                                            name="send" size={ 16 } color="#fff" /> { s.send }</button>
+                                    <button className="btn-secondary" onClick={ () => setIsEditing(false) } style={ { flex: 1 } }>{ s
+                                            .cancel }</button>
+                                </div>
+                            ) : (
+                                <>
+                                    <button className="btn-primary" style={ { display: "flex", alignItems: "center",
+                                            justifyContent: "center", gap: 8 } } onClick={ handleSend }><Icon name="send"
+                                            size={ 16 } color="#fff" /> { s.send }</button>
+                                    <div style={ { display: "flex", gap: 10 } }>
+                                        <button className="btn-secondary" style={ { flex: 1 } } onClick={ () => setIsEditing(
+                                            true) }>{ s.editReply }</button>
+                                        <button className="btn-secondary" style={ { flex: 1 } } onClick={ handleSend }>{ s
+                                                .useSuggestion }</button>
+                                    </div>
+                                </>
+                            ) }
+                        </div>
+                    ) : (
+                        <button className="btn-primary" onClick={ () => go("copilot") }>{ s.checkBusiness }</button>
+                    ) }
+                    { sent && <div className="toast"><Icon name="check" size={ 16 } /> { s.messageSent }</div> }
+                </ScreenShell>
+            );
+        }
+
+        // ---------- COPILOT ----------
+        function Copilot({ go, back }) {
+            const s = useStrings();
+            const [asked, setAsked] = useState(false);
+            const [listening, setListening] = useState(false);
+            const [transcript, setTranscript] = useState("");
+            const [response, setResponse] = useState("");
+
+            const startListening = () => {
+                setListening(true);
+                setTranscript("");
+                setAsked(false);
+                setTimeout(() => {
+                    const question = s.copilotQuestion || "How is my business doing?";
+                    setTranscript(question);
+                    setTimeout(() => {
+                        setListening(false);
+                        const reply = s.copilotResponseDetailed || s.copilotResponse;
+                        setResponse(reply);
+                        setAsked(true);
+                    }, 1500);
+                }, 2000);
+            };
+
+            const handleQuestion = (q) => {
+                setTranscript(q);
+                setListening(true);
+                setTimeout(() => {
+                    setListening(false);
+                    let reply = s.copilotResponseDetailed || s.copilotResponse;
+                    if (q.toLowerCase().includes("product") || q.toLowerCase().includes("best")) {
+                        reply = "Your bamboo basket is your best-selling product with 4 units sold this month.";
+                    } else if (q.toLowerCase().includes("contact") || q.toLowerCase().includes("who")) {
+                        reply = "You should contact Rajasthan Home Living – they showed strong interest.";
+                    } else if (q.toLowerCase().includes("improve") || q.toLowerCase().includes("sales")) {
+                        reply = "Consider offering a small discount on bulk orders or highlighting your craft story more.";
+                    }
+                    setResponse(reply);
+                    setAsked(true);
+                }, 1500);
+            };
+
+            return (
+                <ScreenShell>
+                    <Header title={ s.copilotTitle } tagText={ s.copilotTag } tagType="ai" onBack={ back } />
+                    <div style={ { flex: 1, display: "flex", flexDirection: "column", gap: 12 } }>
+                        <div style={ { alignSelf: "flex-end", background: "var(--bamboo)", color: "#fff", padding: "12px 15px",
+                                borderRadius: "16px 16px 4px 16px", maxWidth: "80%", fontSize: 14 } }>
+                            { s.howBusiness }
+                        </div>
+                        { !asked && (
+                            <button className="btn-secondary" style={ { maxWidth: 180 } } onClick={ startListening }>
+                                <Icon name="mic" size={ 16 } style={ { marginRight: 8 } } /> { s.ask }
+                            </button>
+                        ) }
+                        { listening && (
+                            <div className="voice-indicator" style={ { alignSelf: "flex-start" } }>
+                                <Icon name="mic" size={ 16 } color="var(--clay)" />
+                                { s.listeningCopilot }
+                                <Waveform style={ { width: 60, height: 20 } } />
+                            </div>
+                        ) }
+                        { transcript && !listening && (
+                            <div className="chip" style={ { alignSelf: "flex-start", background: "#E7EFDF" } }>
+                                <strong>You:</strong> { transcript }
+                            </div>
+                        ) }
+                        { asked && !listening && response && (
+                            <div className="fade-in" style={ { alignSelf: "flex-start", background: "var(--paper-warm)",
+                                    border: "1px solid var(--line)", padding: "14px 16px",
+                                    borderRadius: "16px 16px 16px 4px", maxWidth: "85%", fontSize: 14, lineHeight: 1.6 } }>
+                                { response.split('\n').map((line, i) => <div key={ i }>{ line }</div>) }
+                            </div>
+                        ) }
+                        { asked && (
+                            <div style={ { display: "flex", flexDirection: "column", gap: 8, marginTop: 6 } }>
+                                { s.suggestedQuestions.map(q => (
+                                    <button key={ q } className="chip" style={ { textAlign: "left" } } onClick={ () =>
+                                            handleQuestion(q) }>{ q }</button>
+                                )) }
+                            </div>
+                        ) }
+                    </div>
+                    <button className="btn-primary" style={ { marginTop: 16 } } onClick={ () => go("summary") }>{ s
+                            .finishJourney }</button>
+                </ScreenShell>
+            );
+        }
+
+        // ---------- SUMMARY ----------
+        function Summary({ go, back }) {
+            const s = useStrings();
+            const journey = s.journeySteps;
+            return (
+                <ScreenShell>
+                    <Header title="Journey Complete" onBack={ back } />
+                    <div style={ { display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center",
+                            gap: 14, marginBottom: 20 } }>
+                        <div style={ { display: "flex", gap: -10 } }>
+                            <MeeraPortrait size={ 80 } />
+                        </div>
+                        <div style={ { height: 70 } }><ProductImage size={ 70 } /></div>
+                    </div>
+                    <div className="card" style={ { marginBottom: 18 } }>
+                        { journey.map((j, i) => (
+                            <div key={ j } style={ { display: "flex", alignItems: "center", gap: 10, padding: "6px 0" } }>
+                                <span style={ { width: 6, height: 6, borderRadius: "50%", background: "var(--bamboo)",
+                                        flex: "0 0 6px" } }></span>
+                                <span style={ { fontSize: 13, fontWeight: 600 } }>{ j }</span>
+                            </div>
+                        )) }
+                    </div>
+                    <div style={ { textAlign: "center", marginBottom: 18 } }>
+                        <div className="serif" style={ { fontSize: 15, fontStyle: "italic", color: "var(--ink-soft)",
+                                marginBottom: 10 } }>"AI does the digital work.<br />The artisan does the craft."</div>
+                        <div className="serif" style={ { fontSize: 19, fontWeight: 600, color: "var(--bamboo-deep)",
+                                lineHeight: 1.4 } }>{ s.journeySummary }</div>
+                    </div>
+                    <button className="btn-secondary" onClick={ () => go("home") }>{ s.backToHome }</button>
+                </ScreenShell>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+</body>
+</html>
