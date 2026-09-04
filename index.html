@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>ShilpSetu — Your craft. Your digital business.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,6 +13,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js">
     </script>
     <style>
+        /* ---------- reset & base ---------- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        body {
+            background: var(--paper);
+            font-family: 'Manrope', sans-serif;
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+        }
+        #root {
+            height: 100%;
+            width: 100%;
+        }
+
+        /* ---------- variables (same as before) ---------- */
         :root {
             --ink: #241C14;
             --ink-soft: #5A4F41;
@@ -29,24 +53,8 @@
             --ok: #3E7D4C;
             --shadow: 0 18px 40px -20px rgba(36, 28, 20, 0.35);
         }
-        * {
-            box-sizing: border-box;
-        }
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            background:
-                radial-gradient(1200px 600px at 12% -10%, #F6E9CC 0%, transparent 60%),
-                radial-gradient(1000px 700px at 100% 10%, #EFDCB1 0%, transparent 55%),
-                var(--paper);
-            font-family: 'Manrope', sans-serif;
-            color: var(--ink);
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-        }
+
+        /* ---------- typography ---------- */
         h1,
         h2,
         h3,
@@ -62,109 +70,69 @@
             color: var(--ink);
         }
 
-        .stage {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 28px 16px;
-            gap: 40px;
-        }
-        .stage-side {
-            display: none;
-        }
-        @media(min-width:1040px) {
-            .stage-side {
-                display: flex;
-                flex-direction: column;
-                gap: 18px;
-                width: 300px;
-            }
-        }
-        .brandmark {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .brandmark .logo {
-            width: 46px;
-            height: 46px;
-            border-radius: 13px;
-            background: linear-gradient(155deg, var(--bamboo) 0%, var(--bamboo-deep) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow);
-        }
-        .side-note {
-            font-size: 14.5px;
-            line-height: 1.6;
-            color: var(--ink-soft);
-            border-left: 2px solid var(--line);
-            padding-left: 16px;
-        }
-        .side-quote {
-            font-family: 'Fraunces', serif;
-            font-size: 22px;
-            font-style: italic;
-            color: var(--bamboo-deep);
-            line-height: 1.35;
-        }
-
-        .phone {
-            width: 390px;
-            max-width: 100%;
-            height: 820px;
-            max-height: 92vh;
-            background: var(--card);
-            border-radius: 44px;
-            border: 10px solid var(--ink);
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
+        /* ---------- app container ---------- */
+        .app-container {
             display: flex;
             flex-direction: column;
+            height: 100vh;
+            width: 100%;
+            max-width: 100%;
+            background:
+                radial-gradient(1200px 600px at 12% -10%, #F6E9CC 0%, transparent 60%),
+                radial-gradient(1000px 700px at 100% 10%, #EFDCB1 0%, transparent 55%),
+                var(--paper);
+            overflow: hidden;
+            position: relative;
         }
-        .notch {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 130px;
-            height: 26px;
-            background: var(--ink);
-            border-bottom-left-radius: 16px;
-            border-bottom-right-radius: 16px;
-            z-index: 50;
-        }
-        .statusbar {
-            height: 44px;
-            flex: 0 0 44px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 26px;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--ink);
-        }
-        .screen {
+
+        /* ---------- screen area ---------- */
+        .app-screen {
             flex: 1;
             overflow-y: auto;
             overflow-x: hidden;
-            position: relative;
             scrollbar-width: none;
+            padding: 20px 20px 10px;
+            /* consistent padding like before */
         }
-        .screen::-webkit-scrollbar {
+        .app-screen::-webkit-scrollbar {
             display: none;
         }
         .screen-inner {
-            padding: 22px 22px 30px;
+            padding: 0 0 10px 0;
+            /* inner padding handled per screen */
             min-height: 100%;
             display: flex;
             flex-direction: column;
         }
 
+        /* ---------- bottom navigation ---------- */
+        .app-bottomnav {
+            flex: 0 0 74px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border-top: 1px solid var(--line);
+            background: var(--card);
+            padding: 0 8px;
+            width: 100%;
+        }
+        .navitem {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--ink-soft);
+            background: none;
+            border: none;
+            padding: 6px 12px;
+        }
+        .navitem.active {
+            color: var(--bamboo-deep);
+        }
+
+        /* ---------- all other styles from original (unchanged) ---------- */
         .tag {
             display: inline-flex;
             align-items: center;
@@ -351,29 +319,6 @@
         }
         .progressdots span.on {
             background: var(--bamboo);
-        }
-
-        .bottomnav {
-            flex: 0 0 74px;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            border-top: 1px solid var(--line);
-            background: var(--card);
-        }
-        .navitem {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--ink-soft);
-            background: none;
-            border: none;
-        }
-        .navitem.active {
-            color: var(--bamboo-deep);
         }
 
         .slider-wrap {
@@ -644,7 +589,7 @@
             }
         }
 
-        /* new logo style */
+        /* splash logo */
         .splash-logo {
             display: flex;
             flex-direction: column;
@@ -670,6 +615,68 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             margin-top: 2px;
+        }
+
+        /* ---------- responsive tweaks for large screens ---------- */
+        @media (min-width: 768px) {
+            .app-screen {
+                padding: 30px 40px 20px;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            .app-bottomnav {
+                max-width: 600px;
+                margin: 0 auto;
+                border-radius: 0 0 20px 20px;
+            }
+            .app-container {
+                background: var(--paper);
+                align-items: center;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .app-screen {
+                padding: 40px 60px 30px;
+                max-width: 700px;
+            }
+            .app-bottomnav {
+                max-width: 700px;
+            }
+        }
+
+        /* camera screen overrides */
+        .camera-full {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: #161109;
+        }
+        .camera-full .camera-preview {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        .camera-full .camera-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .camera-full .camera-controls {
+            padding: 18px 22px 26px;
+            background: #161109;
+        }
+        .camera-full .camera-controls .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .camera-full .camera-controls .capture-btn {
+            width: 74px;
+            height: 74px;
+            border-radius: 50%;
+            background: #fff;
+            border: 5px solid rgba(255, 255, 255, .35);
         }
     </style>
 </head>
@@ -1439,36 +1446,11 @@
 
             return (
                 <LanguageContext.Provider value={ { lang, setLang } }>
-                    <div className="stage">
-                        <div className="stage-side">
-                            <div className="brandmark">
-                                <div className="logo"><Icon name="leaf" color="#E3D9B8" size={ 24 } /></div>
-                                <div>
-                                    <div className="serif" style={ { fontSize: 20, fontWeight: 600 } }>ShilpSetu</div>
-                                    <div style={ { fontSize: 12.5, color: "var(--ink-soft)", fontWeight: 600 } }>SIH 2026 · PS
-                                        26090</div>
-                                </div>
-                            </div>
-                            <p className="side-quote">"AI does the digital work.<br />The artisan does the craft."</p>
-                            <p className="side-note">Following Meera Devi, a bamboo &amp; cane artisan from Jaipur, as she lists
-                                her handwoven storage basket — from workshop to marketplace, in one continuous session.</p>
+                    <div className="app-container">
+                        <div className="app-screen">
+                            { content }
                         </div>
-
-                        <div className="phone">
-                            <div className="notch"></div>
-                            <div className="statusbar">
-                                <span>9:41</span>
-                                <span style={ { display: "flex", gap: 6, alignItems: "center" } }>
-                                    <svg width="16" height="12" viewBox="0 0 16 12"><rect width="14" height="10" rx="2" fill="none"
-                                            stroke="#241C14" strokeWidth="1" /><rect x="2" y="2" width="8" height="6"
-                                            fill="#241C14" /></svg>
-                                </span>
-                            </div>
-                            <div className="screen">
-                                { content }
-                            </div>
-                            { showNav && <BottomNav screen={ screen } go={ go } /> }
-                        </div>
+                        { showNav && <BottomNav screen={ screen } go={ go } /> }
                     </div>
                 </LanguageContext.Provider>
             );
@@ -1484,7 +1466,7 @@
                 ["profile2", "user", s.profileTab]
             ];
             return (
-                <div className="bottomnav">
+                <div className="app-bottomnav">
                     { items.map(([key, icon, label]) => (
                         <button key={ key } className={ "navitem" + (screen === key ? " active" : "") } onClick={ () => go(
                             key) }>
@@ -1516,7 +1498,7 @@
                             <div className="brand-sub">Your craft · Your digital business</div>
                         </div>
 
-                        <div style={ { borderRadius: 24, overflow: "hidden", width: 220, height: 150,
+                        <div style={ { borderRadius: 24, overflow: "hidden", width: "100%", maxWidth: 280, height: 180,
                                 boxShadow: "var(--shadow)" } }>
                             <WorkshopScene cluttered={ true } />
                         </div>
@@ -1524,7 +1506,7 @@
                         <div>
                             <p style={ { margin: "0 0 4px", fontWeight: 700, fontSize: 15.5 } }>{ s.tagline }</p>
                             <p style={ { margin: 0, color: "var(--ink-soft)", fontSize: 14, lineHeight: 1.55,
-                                    maxWidth: 280 } }>{ s.splashDesc }</p>
+                                    maxWidth: 320 } }>{ s.splashDesc }</p>
                         </div>
                     </div>
                     <button className="btn-primary" onClick={ () => go("language") }>{ s.getStarted }</button>
@@ -1883,12 +1865,10 @@
             }, [stage, count]);
 
             return (
-                <div className="fade-in" style={ { height: "100%", display: "flex", flexDirection: "column",
-                        background: "#161109" } }>
-                    <div style={ { flex: 1, position: "relative", overflow: "hidden" } }>
+                <div className="camera-full">
+                    <div className="camera-preview">
                         { stage !== "captured" && (
-                            <img src="before.png" alt="Camera preview" style={ { width: "100%", height: "100%",
-                                    objectFit: "cover" } } />
+                            <img src="before.png" alt="Camera preview" />
                         ) }
                         { stage !== "captured" && (
                             <div style={ { position: "absolute", inset: 24, border: "2.5px dashed rgba(255,255,255,.85)",
@@ -1920,15 +1900,13 @@
                             </div>
                         ) }
                     </div>
-                    <div style={ { padding: "18px 22px 26px", background: "#161109" } }>
+                    <div className="camera-controls">
                         { stage !== "captured" ? (
-                            <div style={ { display: "flex", alignItems: "center", justifyContent: "space-between" } }>
+                            <div className="row">
                                 <div style={ { width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,.12)",
                                         display: "flex", alignItems: "center", justifyContent: "center" } }><Icon
                                         name="flash" color="#fff" size={ 18 } /></div>
-                                <button onClick={ () => stage === "frame" && setStage("counting") } style={ { width: 74,
-                                        height: 74, borderRadius: "50%", background: "#fff",
-                                        border: "5px solid rgba(255,255,255,.35)" } }></button>
+                                <button onClick={ () => stage === "frame" && setStage("counting") } className="capture-btn"></button>
                                 <div style={ { width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,.12)",
                                         display: "flex", alignItems: "center", justifyContent: "center" } }><Icon
                                         name="flip" color="#fff" size={ 18 } /></div>
