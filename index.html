@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ShilpSetu — Your craft. Your digital business.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,30 +13,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js">
     </script>
     <style>
-        /* ---------- reset & base ---------- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        html,
-        body {
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-        }
-        body {
-            background: var(--paper);
-            font-family: 'Manrope', sans-serif;
-            color: var(--ink);
-            -webkit-font-smoothing: antialiased;
-        }
-        #root {
-            height: 100%;
-            width: 100%;
-        }
-
-        /* ---------- variables (same as before) ---------- */
         :root {
             --ink: #241C14;
             --ink-soft: #5A4F41;
@@ -53,8 +29,24 @@
             --ok: #3E7D4C;
             --shadow: 0 18px 40px -20px rgba(36, 28, 20, 0.35);
         }
-
-        /* ---------- typography ---------- */
+        * {
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background:
+                radial-gradient(1200px 600px at 12% -10%, #F6E9CC 0%, transparent 60%),
+                radial-gradient(1000px 700px at 100% 10%, #EFDCB1 0%, transparent 55%),
+                var(--paper);
+            font-family: 'Manrope', sans-serif;
+            color: var(--ink);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
         h1,
         h2,
         h3,
@@ -70,69 +62,109 @@
             color: var(--ink);
         }
 
-        /* ---------- app container ---------- */
-        .app-container {
+        .stage {
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            height: 100vh;
-            width: 100%;
-            max-width: 100%;
-            background:
-                radial-gradient(1200px 600px at 12% -10%, #F6E9CC 0%, transparent 60%),
-                radial-gradient(1000px 700px at 100% 10%, #EFDCB1 0%, transparent 55%),
-                var(--paper);
-            overflow: hidden;
-            position: relative;
+            align-items: center;
+            justify-content: center;
+            padding: 28px 16px;
+            gap: 40px;
+        }
+        .stage-side {
+            display: none;
+        }
+        @media(min-width:1040px) {
+            .stage-side {
+                display: flex;
+                flex-direction: column;
+                gap: 18px;
+                width: 300px;
+            }
+        }
+        .brandmark {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .brandmark .logo {
+            width: 46px;
+            height: 46px;
+            border-radius: 13px;
+            background: linear-gradient(155deg, var(--bamboo) 0%, var(--bamboo-deep) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+        .side-note {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: var(--ink-soft);
+            border-left: 2px solid var(--line);
+            padding-left: 16px;
+        }
+        .side-quote {
+            font-family: 'Fraunces', serif;
+            font-size: 22px;
+            font-style: italic;
+            color: var(--bamboo-deep);
+            line-height: 1.35;
         }
 
-        /* ---------- screen area ---------- */
-        .app-screen {
+        .phone {
+            width: 390px;
+            max-width: 100%;
+            height: 820px;
+            max-height: 92vh;
+            background: var(--card);
+            border-radius: 44px;
+            border: 10px solid var(--ink);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 26px;
+            background: var(--ink);
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            z-index: 50;
+        }
+        .statusbar {
+            height: 44px;
+            flex: 0 0 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 26px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--ink);
+        }
+        .screen {
             flex: 1;
             overflow-y: auto;
             overflow-x: hidden;
+            position: relative;
             scrollbar-width: none;
-            padding: 20px 20px 10px;
-            /* consistent padding like before */
         }
-        .app-screen::-webkit-scrollbar {
+        .screen::-webkit-scrollbar {
             display: none;
         }
         .screen-inner {
-            padding: 0 0 10px 0;
-            /* inner padding handled per screen */
+            padding: 22px 22px 30px;
             min-height: 100%;
             display: flex;
             flex-direction: column;
         }
 
-        /* ---------- bottom navigation ---------- */
-        .app-bottomnav {
-            flex: 0 0 74px;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            border-top: 1px solid var(--line);
-            background: var(--card);
-            padding: 0 8px;
-            width: 100%;
-        }
-        .navitem {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--ink-soft);
-            background: none;
-            border: none;
-            padding: 6px 12px;
-        }
-        .navitem.active {
-            color: var(--bamboo-deep);
-        }
-
-        /* ---------- all other styles from original (unchanged) ---------- */
         .tag {
             display: inline-flex;
             align-items: center;
@@ -319,6 +351,29 @@
         }
         .progressdots span.on {
             background: var(--bamboo);
+        }
+
+        .bottomnav {
+            flex: 0 0 74px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border-top: 1px solid var(--line);
+            background: var(--card);
+        }
+        .navitem {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--ink-soft);
+            background: none;
+            border: none;
+        }
+        .navitem.active {
+            color: var(--bamboo-deep);
         }
 
         .slider-wrap {
@@ -588,96 +643,6 @@
                 border-color: #d47a5a;
             }
         }
-
-        /* splash logo */
-        .splash-logo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .splash-logo svg {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 8px;
-        }
-        .splash-logo .brand-text {
-            font-family: 'Fraunces', serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--bamboo-deep);
-            letter-spacing: -0.5px;
-            line-height: 1.1;
-        }
-        .splash-logo .brand-sub {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--ink-soft);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-top: 2px;
-        }
-
-        /* ---------- responsive tweaks for large screens ---------- */
-        @media (min-width: 768px) {
-            .app-screen {
-                padding: 30px 40px 20px;
-                max-width: 600px;
-                margin: 0 auto;
-            }
-            .app-bottomnav {
-                max-width: 600px;
-                margin: 0 auto;
-                border-radius: 0 0 20px 20px;
-            }
-            .app-container {
-                background: var(--paper);
-                align-items: center;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .app-screen {
-                padding: 40px 60px 30px;
-                max-width: 700px;
-            }
-            .app-bottomnav {
-                max-width: 700px;
-            }
-        }
-
-        /* camera screen overrides */
-        .camera-full {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            background: #161109;
-        }
-        .camera-full .camera-preview {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-        }
-        .camera-full .camera-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .camera-full .camera-controls {
-            padding: 18px 22px 26px;
-            background: #161109;
-        }
-        .camera-full .camera-controls .row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .camera-full .camera-controls .capture-btn {
-            width: 74px;
-            height: 74px;
-            border-radius: 50%;
-            background: #fff;
-            border: 5px solid rgba(255, 255, 255, .35);
-        }
     </style>
 </head>
 <body>
@@ -730,9 +695,6 @@
         // ---------- STRINGS ----------
         const STRINGS = {
             en: {
-                home: "Home",
-                beforeLabel: "BEFORE",
-                afterLabel: "AFTER",
                 appName: "ShilpSetu",
                 tagline: "Your craft. Your digital business.",
                 splashDesc: "Turn your handmade products into professional digital listings and reach more buyers with AI.",
@@ -880,7 +842,7 @@
                 ],
                 finishJourney: "Finish Journey",
                 journeySummary: "The artisan creates the craft.\nShilpSetu creates the digital business.",
-                back: "Back",
+              back: "Back",
                 save: "Save",
                 cancel: "Cancel",
                 saveChanges: "Save Changes",
@@ -899,47 +861,27 @@
                 listeningCopilot: "Listening to your question…",
                 askCopilot: "Ask a question",
                 copilotQuestion: "How is my business doing?",
-                copilotResponseDetailed: "You currently have: 12 enquiries, 4 orders, ₹46,000 in sales. Your bamboo baskets are receiving strong buyer interest.",
+                copilotResponseDetailed: "You currently have: 12 enquiries, 4 orders, ₹46,000 in sales. Your bamboo baskets are rectrong buyer interest.",
                 step1: "Detecting product",
                 step2: "Removing background distractions",
                 step3: "Improving lighting",
                 step4: "Correcting framing",
                 step5: "Centering product",
                 step6: "Preparing marketplace image",
-                journeySteps: ["Handmade product", "Takes photo", "AI improves photo", "Speaks", "AI understands",
-                    "AI creates catalog", "AI creates craft story", "AI suggests price", "Meera approves",
-                    "Product goes live", "AI finds buyers", "Business grows"
-                ],
-                buyer1Name: "Rajasthan Home Living",
-                buyer1Match: "94% Match",
-                buyer2Name: "CraftRoots Store",
-                buyer2Match: "88% Match",
-                buyer3Name: "Heritage Basket Co.",
-                buyer3Match: "84% Match",
-                buyer1Detail: "Interested in 5 bamboo baskets",
-                buyer1Price: "Expected price: ₹900 – ₹1,000",
-                artisanName: "Meera Devi",
-                artisanLocation: "Jaipur, Rajasthan",
-                artisanCraft: "Traditional Bamboo & Cane Craft",
-                artisanExperience: "14 years",
             },
             hi: {
-                home: "होम",
-                beforeLabel: "पहले",
-                afterLabel: "बाद",
                 appName: "शिल्पसेतु",
-                tagline: "आपका शिल्प। आपका डिजिटल व्यवसाय।",
-                splashDesc: "अपने हस्तनिर्मित उत्पादों को पेशेवर डिजिटल लिस्टिंग में बदलें और AI के साथ अधिक खरीदारों तक पहुँचें।",
+                tagline: "आपका शिल्प। आपका डिजिटल व्यवसा               splashDesc: "अपने हस्तनिर्मित उत्पादों को पेशेवर डिजिटल लिस्टिंग में बदलें और AI के साथ अधिक खरीदारों तक पहुँचें।",
                 getStarted: "शुरू करें",
                 chooseLang: "अपनी भाषा चुनें",
-                langSub: "आप इसे कभी भी बदल सकते हैं।",
+                langSub: "आप इसे कभी भी बदल सकते हà
                 continue: "जारी रखें",
                 roleTitle: "आप क्या करना चाहते हैं?",
                 roleSub: "अपने लिए उपयुक्त विकल्प चुनें।",
                 artisan: "कारीगर",
                 artisanDesc: "मैं हस्तनिर्मित उत्पाद बनाती हूँ",
                 buyer: "खरीदार",
-                buyerDesc: "मैं हस्तनिर्मित उत्पाद खरीदना चाहता/चाहती हूँ",
+                buyerDesc: "मैं à¤¾द खरीदना चाहता/चाहती हूँ",
                 continueAs: "इस रूप में जारी रखें",
                 profileTitle: "आइए आपकी कारीगर प्रोफ़ाइल सेट करें",
                 profileSub: "खरीदार आपके बारे में यही देखेंगे।",
@@ -950,67 +892,64 @@
                 createBusiness: "मेरा व्यवसाय बनाएँ",
                 goodMorning: "सुप्रभात",
                 addProduct: "+ नया उत्पाद जोड़ें",
-                myProducts: "मेरे उत्पाद",
-                orders: "ऑर्डर",
+                myProducts: "मेरे उà       orders: "ऑर्डर",
                 myIncome: "मेरी आय",
                 askShilpSetu: "शिल्पसेतु से पूछें",
                 askExample: '"मेरा व्यवसाय कैसा चल रहा है?"',
                 yourProducts: "आपके उत्पाद",
                 live: "लाइव",
                 productName: "हस्तनिर्मित बाँस स्टोरेज बास्केट",
-                price: "₹950",
+           ce: "₹950",
                 stock: "12 स्टॉक में",
                 productsTab: "आपके उत्पाद",
                 productsSub: "शिल्पसेतु पर आपके द्वारा सूचीबद्ध सभी उत्पाद।",
                 addAnother: "+ एक और उत्पाद जोड़ें",
                 buyersTab: "खरीदार",
-                buyersSub: "आपके शिल्प में रुचि रखने वाले लोग और स्टोर।",
+                buyersSub: "आपके शिल्प में रुचि रखन लोग और स्टोर।",
                 businessTab: "आपका व्यवसाय",
                 businessSub: "एक त्वरित नज़र कि चीजें कैसी चल रही हैं।",
                 enquiries: "पूछताछ",
                 sales: "बिक्री",
                 bestSeller: "सबसे अधिक बिकने वाला",
-                askBusiness: "शिल्पसेतु से अपने व्यवसाय के बारे में पूछें",
+                askBusiness: "शिल्पसेतु से अपने व्यàमें पूछें",
                 askBusinessSub: "सरल उत्तर पाएँ, चार्ट पढ़ने की ज़रूरत नहीं",
                 profileTab: "आपकी प्रोफ़ाइल",
                 businessSummary: "व्यवसाय सारांश",
                 backToHome: "होम पर वापस जाएँ",
                 addProductTitle: "आइए आपका उत्पाद जोड़ें",
-                addProductSub: "एक फोटो लें और हमें इसके बारे में बताएँ। शिल्पसेतु डिजिटल काम करेगा।",
+                atSub: "एक फोटो लें और हमें इसके बारे में बताएँ। शिल्पसेतु डिजिटल काम करेगा।",
                 takePhoto: "फोटो लें",
                 takePhotoDesc: "अभी अपना कैमरा उपयोग करें",
                 chooseGallery: "गैलरी से चुनें",
-                chooseGalleryDesc: "कोई मौजूदा फोटो चुनें",
-                tellUs: "हमें अपने उत्पाद के बारे में बताएँ",
+                chooseGalleryDesc: "कोई मौजूदा फोटो चुनें"              tellUs: "हमें अपने उत्पाद के बारे में बताएँ",
                 tellUsDesc: "इसके बजाय अपनी आवाज़ से शुरू करें",
                 cameraFrame: "अपने उत्पाद को फ्रेम के अंदर रखें",
                 photoCaptured: "फोटो कैप्चर हो गई",
-                useThisPhoto: "इस फोटो का उपयोग करें",
-                retake: "फिर से लें",
+                useThisPhoto: "इस फोटो का उपयोग क          retake: "फिर से लें",
                 aiEnhance: "शिल्पसेतु AI आपकी उत्पाद फोटो को सुधार रहा है",
                 aiEnhanceDone: "आपकी उत्पाद फोटो तैयार है",
                 aiAtWork: "AI कार्यरत",
-                aiSteps: ["उत्पाद का पता लगाना", "पृष्ठभूमि की गड़बड़ी हटाना", "प्रकाश में सुधार",
+                aiSteps: ["उत्पाद का पता लगाना", "पृष्ठभूमि की गड़बड़ी हटाना", "पà
                     "फ्रेमिंग को सही करना", "उत्पाद को केंद्रित करना", "मार्केटप्लेस छवि तैयार करना"
                 ],
                 beforeAfterDesc: "AI ने प्रकाश में सुधार किया, पृष्ठभूमि की गड़बड़ी हटाई, और आपके उत्पाद को केंद्रित किया। तुलना करने के लिए स्लाइडर को खींचें।",
                 useEnhanced: "सुधारी गई फोटो का उपयोग करें",
                 retakePhoto: "फोटो फिर से लें",
                 tellProduct: "हमें अपने उत्पाद के बारे में बताएँ",
-                tellProductSub: "आप टाइप करने के बजाय बोल सकते हैं।",
+                tellProductSub: "आप टाइप करने के बजाय बोल",
                 tapAndSpeak: "टैप करें और बोलें",
                 listening: "सुन रहा हूँ…",
                 recordingComplete: "रिकॉर्डिंग पूरी हुई",
                 continue: "जारी रखें",
                 understandingProduct: "आपके उत्पाद को समझ रहा हूँ…",
                 whatMeeraSaid: "मीरा ने क्या कहा",
-                productDetailsReady: "आपके उत्पाद का विवरण तैयार है",
+                productDetailsRपके उत्पाद का विवरण तैयार है",
                 aiGeneratedDetails: "AI-जनित विवरण",
                 looksGood: "अच्छा लग रहा है",
                 editDetails: "विवरण संपादित करें",
                 productDescription: "आपका उत्पाद विवरण",
                 aiGeneratedDesc: "AI-जनित विवरण",
-                useDescription: "विवरण का उपयोग करें",
+                useDescription: "विवरण का करें",
                 edit: "संपादित करें",
                 craftStoryIntro: "अपने शिल्प के पीछे की कहानी बताएँ",
                 craftStorySub: "आपकी कहानी आपके उत्पाद को खास बनाती है।",
@@ -1020,18 +959,18 @@
                 creatingStory: "आपकी क्राफ्ट स्टोरी बना रहा हूँ…",
                 meerasCraftStory: "मीरा की क्राफ्ट स्टोरी",
                 aiGeneratedCraftStory: "AI-जनित क्राफ्ट स्टोरी",
-                addCraftStory: "मेरी क्राफ्ट स्टोरी जोड़ें",
+                addCraftStory: "मेरी àरी जोड़ें",
                 skip: "छोड़ें",
                 pricingTitle: "आइए आपके उत्पाद की कीमत तय करें",
                 pricingSub: "हमें अपनी लागत बताएँ और शिल्पसेतु एक प्रतिस्पर्धी मूल्य का अनुमान लगाएगा।",
                 materialCost: "कच्चे माल की लागत",
-                otherCosts: "अन्य लागतें",
+              osts: "अन्य लागतें",
                 productionTime: "उत्पादन समय",
                 speakCosts: "अपनी लागत बोलें",
                 suggestPrice: "मूल्य सुझाएँ",
                 calculatingPrice: "सुझाए गए मूल्य की गणना कर रहा हूँ…",
                 suggestedPrice: "सुझाया गया मूल्य",
-                aiEstimate: "AI अनुमान, गारंटी नहीं",
+                aiEstimate: "AI अनुमान, गà,
                 suggestedRange: "सीमा",
                 howEstimated: "यह कैसे अनुमानित किया गया",
                 usePrice: "₹",
@@ -1043,37 +982,36 @@
                 createdWithAI: "शिल्पसेतु AI की सहायता से निर्मित",
                 publishProduct: "उत्पाद प्रकाशित करें",
                 preparingListing: "आपकी उत्पाद लिस्टिंग तैयार कर रहा हूँ…",
-                productLive: "आपका उत्पाद लाइव है।",
+                productLive: "आपका àलाइव है।",
                 buyersCanDiscover: "खरीदार अब आपकी बाँस बास्केट खोज सकते हैं।",
                 findBuyers: "खरीदार खोजें",
                 foundBuyers: "शिल्पसेतु ने आपके उत्पाद के लिए खरीदार ढूंढे",
-                foundBuyersSub: "आपके उत्पाद प्रकार, सामग्री, मूल्य और खरीदार आवश्यकताओं के आधार पर।",
+                foundBuyersSub: "आपके उत्पाद प्रकार, सामग्री, मूल्à¾र आवश्यकताओं के आधार पर।",
                 whyBuyer: "यह खरीदार क्यों?",
                 interestedIn: "हस्तनिर्मित बाँस उत्पादों में रुचि",
                 lookingFor: "5–20 यूनिट की तलाश",
                 targetPrice: "लक्ष्य मूल्य ₹900–₹1,000",
-                interestedInCrafts: "पारंपरिक भारतीय शिल्प में रुचि",
+                interestedInCrafts: "पारंपरिक भारतीय à¤²्प में रुचि",
                 viewBestMatch: "सर्वश्रेष्ठ मैच देखें",
                 buyerDetailTitle: "राजस्थान होम लिविंग",
                 matchTag: "94% मैच",
                 interestedQty: "5 बाँस बास्केट में रुचि",
                 expectedPrice: "अपेक्षित मूल्य: ₹900 – ₹1,000",
-                suggestedReply: "सुझाया गया उत्तर",
+                suggestedReply: "सुझाया गयà
                 send: "भेजें",
                 editReply: "संपादित करें",
                 useSuggestion: "सुझाव का उपयोग करें",
                 messageSent: "राजस्थान होम लिविंग को संदेश भेज दिया गया",
                 checkBusiness: "मेरा व्यवसाय देखें",
                 copilotTitle: "शिल्पसेतु से पूछें",
-                copilotTag: "बिजनेस कोपायलट",
+            copilotTag: "बिजनेस कोपायलट",
                 howBusiness: "मेरा व्यवसाय कैसा चल रहा है?",
                 ask: "पूछें",
-                copilotResponse: "आपके पास वर्तमान में:\n12 पूछताछ\n4 ऑर्डर\n₹46,000 की बिक्री\n\nआपकी बाँस बास्केट खरीदारों के बीच मजबूत रुचि पैदा कर रही है।",
-                suggestedQuestions: ["कौन सा उत्पाद सबसे अच्छा प्रदर्शन कर रहा है?", "मुझे किससे संपर्क करना चाहिए?",
+                copilotResponse: "आपके पास वर्तमान में:\n12 पूछताछ\n4 ऑर्डर\n₹46,000 की बिक्री\n\nआपकी बाँस बास्केट खरीदारों के बीच मजबूत रुचि पैदा à              suggestedQuestions: ["कौन सा उत्पाद सबसे अच्छा प्रदर्शन कर रहा है?", "मुझे किससे संपर्क करना चाहिए?",
                     "मैं अपनी बिक्री कैसे सुधार सकता/सकती हूँ?"
                 ],
                 finishJourney: "यात्रा समाप्त करें",
-                journeySummary: "कारीगर शिल्प बनाता है।\nशिल्पसेतु डिजिटल व्यवसाय बनाता है।",
+                journeySummary: "कारा है।\nशिल्पसेतु डिजिटल व्यवसाय बनाता है।",
                 back: "वापस",
                 save: "सहेजें",
                 cancel: "रद्द करें",
@@ -1087,44 +1025,30 @@
                 speakNow: "अभी बोलें...",
                 stopListening: "सुनना बंद करें",
                 extractedCosts: "मैंने आपकी लागतें समझ ली हैं:",
-                materialExtracted: "कच्चे माल की लागत: ₹",
+                materialExtracted: "कच्चे माल की लà₹",
                 otherExtracted: "अन्य लागतें: ₹",
                 timeExtracted: "उत्पादन समय: ",
                 listeningCopilot: "आपका प्रश्न सुन रहा हूँ…",
                 askCopilot: "प्रश्न पूछें",
                 copilotQuestion: "मेरा व्यवसाय कैसा चल रहा है?",
-                copilotResponseDetailed: "आपके पास वर्तमान में: 12 पूछताछ, 4 ऑर्डर, ₹46,000 की बिक्री। आपकी बाँस बास्केट खरीदारों के बीच मजबूत रुचि पैदा कर रही है।",
+                copilotResponseDetailed: "आपके पास वर्तमान à12 पूछताछ, 4 ऑर्डर, ₹46,000 की बिक्री। आपकी बाँस बास्केट खरीदारों के बीच मजबूत रुचि पैदा कर रही है।",
                 step1: "उत्पाद का पता लगाना",
                 step2: "पृष्ठभूमि की गड़बड़ी हटाना",
                 step3: "प्रकाश में सुधार",
-                step4: "फ्रेमिंग को सही करना",
+                stepरेमिंग को सही करना",
                 step5: "उत्पाद को केंद्रित करना",
                 step6: "मार्केटप्लेस छवि तैयार करना",
-                journeySteps: ["हस्तनिर्मित उत्पाद", "फोटो लेता है", "AI फोटो सुधारता है", "बोलता है",
-                    "AI समझता है", "AI कैटलॉग बनाता है", "AI क्राफ्ट स्टोरी बनाता है", "AI मूल्य सुझाता है",
-                    "मीरा स्वीकार करती है", "उत्पाद लाइव होता है", "AI खरीदार ढूंढता है", "व्यवसाय बढ़ता है"
-                ],
-                buyer1Name: "राजस्थान होम लिविंग",
-                buyer1Match: "94% मैच",
-                buyer2Name: "क्राफ्टरूट्स स्टोर",
-                buyer2Match: "88% मैच",
-                buyer3Name: "हेरिटेज बास्केट कंपनी",
-                buyer3Match: "84% मैच",
-                buyer1Detail: "5 बाँस बास्केट में रुचि",
-                buyer1Price: "अपेक्षित मूल्य: ₹900 – ₹1,000",
-                artisanName: "मीरा देवी",
-                artisanLocation: "जयपुर, राजस्थान",
-                artisanCraft: "पारंपरिक बाँस और बेंत शिल्प",
-                artisanExperience: "14 वर्ष",
             }
         };
 
+        // Helper to get string
         function useStrings() {
             const { lang } = useContext(LanguageContext);
             return STRINGS[lang] || STRINGS.en;
         }
 
-        function useProduct() {
+        // Helper to get product data based on language
+      tion useProduct() {
             const { lang } = useContext(LanguageContext);
             return lang === "hi" ? PRODUCT_HI : PRODUCT_EN;
         }
@@ -1209,6 +1133,7 @@
             );
         }
 
+        // Workshop scene for splash
         function WorkshopScene({ cluttered = true }) {
             return (
                 <svg viewBox="0 0 320 320" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
@@ -1265,7 +1190,7 @@
             );
         }
 
-        // ---------- Product Image component ----------
+        // ---------- Product Image component (uses after.png) ----------
         function ProductImage({ size = 140, className = "" }) {
             return (
                 <img src="after.png" alt="Product" style={ { width: size, height: size, objectFit: "cover", borderRadius: 16 } }
@@ -1333,8 +1258,6 @@
             const [screen, setScreen] = useState("splash");
             const [lang, setLang] = useState("en");
             const [history, setHistory] = useState([]);
-            const [productPublished, setProductPublished] = useState(false);
-
             const go = (s) => { setHistory(h => [...h, screen]);
                 setScreen(s); };
             const back = () => {
@@ -1346,6 +1269,9 @@
                 });
             };
 
+            const screensNoNav = ["splash", "language", "role", "camera", "enhance", "voiceDescribe", "understandVoice",
+                "craftStoryVoice", "craftStoryProcess", "pricingProcess", "publishing"
+            ];
             const showNav = ["home", "products", "buyers", "business", "profile2"].includes(screen);
 
             let content;
@@ -1363,10 +1289,10 @@
                     content = <ProfileSetup go={ go } back={ back } />;
                     break;
                 case "home":
-                    content = <Home go={ go } productPublished={ productPublished } />;
+                    content = <Home go={ go } />;
                     break;
                 case "products":
-                    content = <ProductsTab go={ go } productPublished={ productPublished } />;
+                    content = <ProductsTab go={ go } />;
                     break;
                 case "buyers":
                     content = <BuyersTab go={ go } />;
@@ -1423,7 +1349,7 @@
                     content = <FinalReview go={ go } back={ back } />;
                     break;
                 case "publishing":
-                    content = <Publishing go={ go } back={ back } onPublishDone={ () => { setProductPublished(true); } } />;
+                    content = <Publishing go={ go } back={ back } />;
                     break;
                 case "live":
                     content = <LiveListing go={ go } back={ back } />;
@@ -1446,11 +1372,37 @@
 
             return (
                 <LanguageContext.Provider value={ { lang, setLang } }>
-                    <div className="app-container">
-                        <div className="app-screen">
-                            { content }
+                    <div className="stage">
+                        <div className="stage-side">
+                            <div className="brandmark">
+                                <div className="logo"><Icon name="leaf" color="#E3D9B8" size={ 24 } /></div>
+                                <div>
+                                    <div className="serif" style={ { fontSize: 20, fontWeight: 600 } }>ShilpSetu</div>
+                                    <div style={ { fontSize: 12.5, color: "var(--ink-soft)", fontWeight: 600 } }>SIH 2026 · PS
+                                        26090</div>
+                                </div>
+                            </div>
+                            <p className="side-quote">"AI does the digital work.<br />The artisan does the craft."</p>
+                            <p className="side-note">Following Meera Devi, a bamboo &amp; cane artisan from Jaipur, as she lists
+                                her handwoven strage basket — from workshop to marketplace, in one continuous session.</p>
                         </div>
-                        { showNav && <BottomNav screen={ screen } go={ go } /> }
+
+                        <div className="phone">
+                            <div className="notch"></div>
+                            <div className="statusbar">
+                                <span>9:41</span>
+                                <span style={ { display: "flex", gap: 6, alignItems: "center" } }>
+                                    <span style={ { fontSize: 11 } }>{ lang === "en" ? "" : िं" }</span>
+                                    <svg width="16" height="12" viewBox="0 0 16 12"><rect width="14" height="10" rx="2" fill="none"
+                                            stroke="#241C14" strokeWidth="1" /><rect x="2" y="2" width="8" height="6"
+                                            fill="#241C14" /></svg>
+                                </span>
+                            </div>
+                            <div className="screen">
+                                { content }
+                        </div>
+                            { showNav && <BottomNav screen={ screen } go={ go } /> }
+                        </div>
                     </div>
                 </LanguageContext.Provider>
             );
@@ -1459,14 +1411,14 @@
         function BottomNav({ screen, go }) {
             const s = useStrings();
             const items = [
-                ["home", "home", s.home],
-                ["products", "box", s.productsTab],
-                ["buyers", "users", s.buyersTab],
-                ["business", "chart", s.businessTab],
-                ["profile2", "user", s.profileTab]
+                ["home", "home", s.home || "Home"],
+                ["products", "box", s.productsTab || "Products"],
+                ["buyers", "users", s.buyersTab || "Buyers"],
+                ["business", "chart", s.businessTab || "Business"],
+                ["profile2", "user", s.profileTab || "Profile"]
             ];
             return (
-                <div className="app-bottomnav">
+                <div className="bottomnav">
                     { items.map(([key, icon, label]) => (
                         <button key={ key } className={ "navitem" + (screen === key ? " active" : "") } onClick={ () => go(
                             key) }>
@@ -1484,29 +1436,16 @@
                 <ScreenShell>
                     <div style={ { flex: 1, display: "flex", flexDirection: "column", justifyContent: "center",
                             alignItems: "center", textAlign: "center", gap: 22 } }>
-                        <div className="splash-logo">
-                            <svg viewBox="0 0 120 120" width="80" height="80">
-                                <circle cx="60" cy="60" r="54" fill="#2E4A34" opacity="0.1" />
-                                <circle cx="60" cy="60" r="48" fill="none" stroke="#2E4A34" strokeWidth="2" strokeDasharray="4 4" />
-                                <path d="M60 20 L65 40 L85 45 L65 50 L60 70 L55 50 L35 45 L55 40 Z" fill="#2E4A34" opacity="0.9" />
-                                <path d="M40 70 L50 75 L45 85 L35 80 Z" fill="#B5502E" opacity="0.8" />
-                                <path d="M80 70 L70 75 L75 85 L85 80 Z" fill="#B5502E" opacity="0.8" />
-                                <path d="M60 55 L60 80" stroke="#2E4A34" strokeWidth="2" strokeLinecap="round" />
-                                <circle cx="60" cy="55" r="4" fill="#E3A63E" />
-                            </svg>
-                            <div className="brand-text">ShilpSetu</div>
-                            <div className="brand-sub">Your craft · Your digital business</div>
-                        </div>
-
-                        <div style={ { borderRadius: 24, overflow: "hidden", width: "100%", maxWidth: 280, height: 180,
+                        <div style={ { borderRadius: 24, overflow: "hidden", width: 220, height: 220,
                                 boxShadow: "var(--shadow)" } }>
                             <WorkshopScene cluttered={ true } />
                         </div>
-
                         <div>
+                            <h1 className="serif" style={ { fontSize: 34, fontWeight: 600, margin: "0 0 8px",
+                                    color: "var(--bamboo-deep)" } }>{ s.appName }</h1>
                             <p style={ { margin: "0 0 4px", fontWeight: 700, fontSize: 15.5 } }>{ s.tagline }</p>
                             <p style={ { margin: 0, color: "var(--ink-soft)", fontSize: 14, lineHeight: 1.55,
-                                    maxWidth: 320 } }>{ s.splashDesc }</p>
+                                    maxWidth: 280 } }>{ s.splashDesc }</p>
                         </div>
                     </div>
                     <button className="btn-primary" onClick={ () => go("language") }>{ s.getStarted }</button>
@@ -1526,7 +1465,7 @@
             ];
             return (
                 <ScreenShell>
-                    <Header title={ s.chooseLang } sub={ s.langSub } />
+                    <Header titls.chooseLang } sub={ s.langSub } />
                     <div style={ { display: "flex", flexDirection: "column", gap: 10, flex: 1 } }>
                         { langs.map(l => (
                             <button key={ l.code } onClick={ () => setLang(l.code) }
@@ -1595,18 +1534,18 @@
                     <div className="card" style={ { display: "flex", gap: 14, alignItems: "center", marginBottom: 16 } }>
                         <MeeraPortrait size={ 72 } />
                         <div>
-                            <div style={ { fontWeight: 800, fontSize: 17 } }>{ s.artisanName }</div>
-                            <div style={ { fontSize: 13, color: "var(--ink-soft)" } }>{ s.artisanLocation }</div>
+                            <div style={ { fontWeight: 800, fontSize: 17 } }>Meera Devi</div>
+                            <div style={ { fontSize: 13, color: "var(--ink-soft)" } }>Jaipur, Rajasthan</div>
                         </div>
                     </div>
                     <div style={ { display: "flex", flexDirection: "column", gap: 12, marginBottom: 16 } }>
                         <div>
                             <div className="field-label">{ s.craftLabel }</div>
-                            <input type="text" defaultValue={ s.artisanCraft } />
+                            <input type="text" defaultValue="Traditional Bamboo & Cane Craft" />
                         </div>
                         <div>
                             <div className="field-label">{ s.experienceLabel }</div>
-                            <input type="text" defaultValue={ s.artisanExperience } />
+                            <input type="text" defaultValue="14 years" />
                         </div>
                     </div>
                     <button className="card" onClick={ () => setListening(l => !l) } style={ { display: "flex",
@@ -1629,7 +1568,7 @@
         }
 
         // ---------- HOME ----------
-        function Home({ go, productPublished }) {
+        function Home({ go }) {
             const s = useStrings();
             const product = useProduct();
             return (
@@ -1638,14 +1577,14 @@
                             marginBottom: 18 } }>
                         <div>
                             <div style={ { fontSize: 13, color: "var(--ink-soft)", fontWeight: 700 } }>{ s.goodMorning }</div>
-                            <h1 className="serif" style={ { margin: 0, fontSize: 24, fontWeight: 600 } }>{ s.artisanName }</h1>
+                            <h1 className="serif" style={ { margin: 0, fontSize: 24, fontWeight: 600 } }>Meera Devi</h1>
                         </div>
                         <MeeraPortrait size={ 52 } />
                     </div>
 
                     <button className="btn-primary" style={ { display: "flex", alignItems: "center", justifyContent: "center",
                             gap: 8, marginBottom: 18 } } onClick={ () => go("addStart") }>
-                        <span style={ { fontSize: 20, lineHeight: 0 } }>+</span> { s.addProduct.replace(/\+ /, '') }
+                        <span style={ { fontSize: 20, lineHeight: 0 } }>+</span> { s.addProduct }
                     </button>
 
                     <div style={ { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginBottom: 18 } }>
@@ -1675,44 +1614,38 @@
                         </div>
                     </button>
 
-                    {productPublished && (
-                        <>
-                            <div className="field-label" style={ { marginBottom: 8 } }>{ s.yourProducts }</div>
-                            <button className="card" style={ { display: "flex", gap: 12, alignItems: "center", textAlign: "left" } }
-                                onClick={ () => go("live") }>
-                                <div style={ { width: 56, height: 56, borderRadius: 12, overflow: "hidden", flex: "0 0 56px" } }>
-                                    <ProductImage size={ 56 } /></div>
-                                <div style={ { flex: 1 } }>
-                                    <div style={ { fontWeight: 700, fontSize: 14 } }>{ product.name }</div>
-                                    <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>{ s.price } · { s.stock }</div>
-                                </div>
-                                <span className="tag live">{ s.live }</span>
-                            </button>
-                        </>
-                    )}
+                    <div className="field-label" style={ { marginBottom: 8 } }>{ s.yourProducts }</div>
+                    <button className="card" style={ { display: "flex", gap: 12, alignItems: "center", textAlign: "left" } }
+                        onClick={ () => go("live") }>
+                        <div style={ { width: 56, height: 56, borderRadius: 12, overflow: "hidden", flex: "0 0 56px" } }>
+                            <ProductImage size={ 56 } /></div>
+                        <div style={ { flex: 1 } }>
+                            <div style={ { fontWeight: 700, fontSize: 14 } }>{ product.name }</div>
+                            <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>{ s.price } · { s.stock }</div>
+                        </div>
+                        <span className="tag live">{ s.live }</span>
+                    </button>
                 </ScreenShell>
             );
         }
 
-        function ProductsTab({ go, productPublished }) {
+        function ProductsTab({ go }) {
             const s = useStrings();
             const product = useProduct();
             return (
                 <ScreenShell>
                     <Header title={ s.productsTab } sub={ s.productsSub } />
-                    {productPublished && (
-                        <button className="card" style={ { display: "flex", gap: 12, alignItems: "center", textAlign: "left",
-                                marginBottom: 12 } } onClick={ () => go("live") }>
-                            <div style={ { width: 56, height: 56, borderRadius: 12, overflow: "hidden", flex: "0 0 56px" } }>
-                                <ProductImage size={ 56 } /></div>
-                            <div style={ { flex: 1 } }>
-                                <div style={ { fontWeight: 700, fontSize: 14 } }>{ product.name }</div>
-                                <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>{ s.price } · 12 in stock · 3 enquiries
-                                </div>
+                    <button className="card" style={ { display: "flex", gap: 12, alignItems: "center", textAlign: "left",
+                            marginBottom: 12 } } onClick={ () => go("live") }>
+                        <div style={ { width: 56, height: 56, borderRadius: 12, overflow: "hidden", flex: "0 0 56px" } }>
+                            <ProductImage size={ 56 } /></div>
+                        <div style={ { flex: 1 } }>
+                            <div style={ { fontWeight: 700, fontSize: 14 } }>{ product.name }</div>
+                            <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>{ s.price } · 12 in stock · 3 enquiries
                             </div>
-                            <span className="tag live">{ s.live }</span>
-                        </button>
-                    )}
+                        </div>
+                        <span className="tag live">{ s.live }</span>
+                  </button>
                     <button className="btn-secondary" onClick={ () => go("addStart") }>{ s.addAnother }</button>
                 </ScreenShell>
             );
@@ -1723,14 +1656,12 @@
             return (
                 <ScreenShell>
                     <Header title={ s.buyersTab } sub={ s.buyersSub } />
-                    <BuyerCard name={ s.buyer1Name } match={ 94 } matchLabel={ s.buyer1Match } color="var(--bamboo)" onClick={ () =>
-                            go("buyerDetail") } />
+                    <BuyerCard name="Rajasthan Home Living" match={ 94 } color="var(--bamboo)" onClick={ () => go(
+                        "buyerDetail") } />
                     <div style={ { height: 10 } } />
-                    <BuyerCard name={ s.buyer2Name } match={ 88 } matchLabel={ s.buyer2Match } color="var(--clay)" onClick={ () =>
-                            go("buyerMatch") } />
+                    <BuyerCard name="CraftRoots Store" match={ 88 } color="var(--clay)" onClick={ () => go("buyerMatch") } />
                     <div style={ { height: 10 } } />
-                    <BuyerCard name={ s.buyer3Name } match={ 84 } matchLabel={ s.buyer3Match } color="var(--teal)" onClick={ () =>
-                            go("buyerMatch") } />
+                    <BuyerCard name="Heritage Basket Co." match={ 84 } color="var(--teal)" onClick={ () => go("buyerMatch") } />
                 </ScreenShell>
             );
         }
@@ -1746,7 +1677,7 @@
                             [s.orders, "4"],
                             [s.sales, "₹46,000"],
                             [s.bestSeller, "Bamboo Basket"]
-                        ].map(([l, v]) => (
+                        ]ap(([l, v]) => (
                             <div key={ l } className="card" style={ { padding: 14 } }>
                                 <div className="serif" style={ { fontSize: 18, fontWeight: 600,
                                         color: "var(--bamboo-deep)" } }>{ v }</div>
@@ -1778,29 +1709,30 @@
                     <div className="card" style={ { display: "flex", gap: 14, alignItems: "center", marginBottom: 16 } }>
                         <MeeraPortrait size={ 72 } />
                         <div>
-                            <div style={ { fontWeight: 800, fontSize: 17 } }>{ s.artisanName }</div>
-                            <div style={ { fontSize: 13, color: "var(--ink-soft)" } }>{ s.artisanLocation }</div>
-                            <div style={ { fontSize: 13, color: "var(--ink-soft)" } }>{ s.artisanCraft } · { s.artisanExperience }</div>
+                            <div style={ { fontWeight: 800, fontSize: 17 } }>Meera Devi</div>
+                            <div style={ { fontSize: 13, color: "var(--ink-soft)" } }>Jaipur, Rajasthan</div>
+                            <div style={ { fontSize: 13, color: "var(--ink-soft)" } }>Traditional Bamboo &amp; Cane Craft · 14
+                                years</div>
                         </div>
                     </div>
                     <div className="card" style={ { marginBottom: 12 } }>
                         <div className="field-label">{ s.businessSummary }</div>
                         <p style={ { margin: 0, fontSize: 14, lineHeight: 1.6, color: "var(--ink-soft)" } }>{ product
-                            .story }</p>
+                           .story }</p>
                     </div>
                     <button className="btn-secondary" onClick={ () => go("home") }>{ s.backToHome }</button>
                 </ScreenShell>
             );
         }
 
-        function BuyerCard({ name, match, matchLabel, color, onClick }) {
+        function BuyerCard({ name, match, color, onClick }) {
             return (
                 <button className="card" onClick={ onClick } style={ { display: "flex", alignItems: "center", gap: 12,
                         textAlign: "left", width: "100%" } }>
                     <div className="match-ring" style={ { background: color } }>{ match }%</div>
                     <div style={ { flex: 1 } }>
                         <div style={ { fontWeight: 700, fontSize: 14.5 } }>{ name }</div>
-                        <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>{ matchLabel }</div>
+                        <div style={ { fontSize: 12.5, color: "var(--ink-soft)" } }>Match with your bamboo basket</div>
                     </div>
                     <Icon name="arrow-right" size={ 16 } color="var(--ink-soft)" />
                 </button>
@@ -1849,7 +1781,6 @@
             );
         }
 
-        // -------- CAMERA SCREEN ----------
         function CameraScreen({ go, back }) {
             const s = useStrings();
             const [stage, setStage] = useState("frame");
@@ -1865,11 +1796,12 @@
             }, [stage, count]);
 
             return (
-                <div className="camera-full">
-                    <div className="camera-preview">
-                        { stage !== "captured" && (
-                            <img src="before.png" alt="Camera preview" />
-                        ) }
+                <div className="fade-in" style={ { height: "100%", display: "flex", flexDirection: "column",
+                        background: "#161109" } }>
+                    <div style={ { flex: 1, position: "relative", overflow: "hidden" } }>
+                        {/* Show before.png as camera preview */}
+                        <img src="before.png" alt="Camera preview" style={ { width: "100%", height: "100%",
+                                objectFit: "cover" } } />
                         { stage !== "captured" && (
                             <div style={ { position: "absolute", inset: 24, border: "2.5px dashed rgba(255,255,255,.85)",
                                     borderRadius: 18, pointerEvents: "none" } }></div>
@@ -1890,23 +1822,26 @@
                         ) }
                         { stage === "flash" && <div className="flash"></div> }
                         { stage === "captured" && (
-                            <div style={ { width: "100%", height: "100%", display: "flex", flexDirection: "column",
-                                    alignItems: "center", justifyContent: "center", background: "#161109" } }>
-                                <img src="before.png" alt="Captured" style={ { width: "80%", height: "80%",
+                            <div style={ { position: "absolute", inset: 0, display: "flex", alignItems: "center",
+                                    justifyContent: "center", flexDirection: "column", gap: 10,
+                                    background: "rgba(20,15,8,.15)" } }>
+                                {/* Show the captured image (after.png) without overlaying on before */}
+                                <img src="after.png" alt="Captured" style={ { width: "80%", height: "80%",
                                         objectFit: "contain", borderRadius: 16 } } />
                                 <span style={ { background: "rgba(0,0,0,.6)", color: "#fff", padding: "7px 14px",
-                                        borderRadius: 99, fontSize: 12.5, fontWeight: 700, marginTop: 10 } }>{ s
-                                        .photoCaptured }</span>
+                                        borderRadius: 99, fontSize: 12.5, fontWeight: 700 } }>{ s.photoCaptured }</span>
                             </div>
                         ) }
                     </div>
-                    <div className="camera-controls">
+                    <div style={ { padding: "18px 22px 26px", background: "#161109" } }>
                         { stage !== "captured" ? (
-                            <div className="row">
+                            <div style={ { display: "flex", alignItems: "center", justifyContent: "space-between" } }>
                                 <div style={ { width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,.12)",
                                         display: "flex", alignItems: "center", justifyContent: "center" } }><Icon
                                         name="flash" color="#fff" size={ 18 } /></div>
-                                <button onClick={ () => stage === "frame" && setStage("counting") } className="capture-btn"></button>
+                                <button onClick={ () => stage === "frame" && setStage("counting") } style={ { width: 74,
+                                        height: 74, borderRadius: "50%", background: "#fff",
+                                        border: "5px solid rgba(255,255,255,.35)" } }></button>
                                 <div style={ { width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,.12)",
                                         display: "flex", alignItems: "center", justifyContent: "center" } }><Icon
                                         name="flip" color="#fff" size={ 18 } /></div>
@@ -1926,7 +1861,6 @@
             );
         }
 
-        // ---------- ENHANCE SCREEN ----------
         function EnhanceScreen({ go, back }) {
             const s = useStrings();
             const [phase, setPhase] = useState("processing");
@@ -1971,10 +1905,10 @@
                                         size={ 12 } /><Icon name="arrow-right" size={ 12 } /></div>
                                 <span style={ { position: "absolute", top: 8, left: 8, background: "rgba(0,0,0,.55)",
                                         color: "#fff", fontSize: 10.5, fontWeight: 700, padding: "3px 8px",
-                                        borderRadius: 99 } }>{ s.beforeLabel }</span>
+                                        borderRadius: 99 } }>BEFORE</span>
                                 <span style={ { position: "absolute", top: 8, right: 8, background: "rgba(46,74,52,.85)",
                                         color: "#fff", fontSize: 10.5, fontWeight: 700, padding: "3px 8px",
-                                        borderRadius: 99 } }>{ s.afterLabel }</span>
+                                        borderRadius: 99 } }>AFTER</span>
                             </div>
                             <p style={ { fontSize: 13.5, color: "var(--ink-soft)", lineHeight: 1.5,
                                 marginTop: 0 } }>{ s.beforeAfterDesc }</p>
@@ -2004,9 +1938,7 @@
             "मैं इसे प्राकृतिक बाँस का उपयोग करके हाथ से बनाती हूँ।",
             "इसे पूरा करने में लगभग तीन दिन लगते हैं।",
             "मैंने यह शिल्प अपनी माँ से सीखा।"
-        ];
-
-        function useRecorder(lines, onFinish, msPerLine = 1500) {
+        ];tion useRecorder(lines, onFinish, msPerLine = 1500) {
             const [seconds, setSeconds] = useState(0);
             const [shownLines, setShownLines] = useState(0);
             useEffect(() => {
@@ -2264,8 +2196,7 @@
             const lines = lang === "hi" ? STORY_LINES_HI : STORY_LINES_EN;
             return (
                 <ScreenShell>
-                    <Header title={ s.recordingStory } tagText={ s.aiCraftStoryteller } tagType="ai" onBack={ back } />
-                    <RecordingPanel lines={ lines } onFinish={ () => go("craftStoryProcess") } />
+                    <Header title={ s.recordingStory } tagText={ s.aiCraftStoryteller } tagType="ai" onBack={ back }            <RecordingPanel lines={ lines } onFinish={ () => go("craftStoryProcess") } />
                 </ScreenShell>
             );
         }
@@ -2305,14 +2236,14 @@
                     <div className="card" style={ { marginBottom: 16, background: "linear-gradient(155deg,#FBF4E6,#F3E7CE)" } }>
                         <div style={ { display: "flex", gap: 10, alignItems: "center", marginBottom: 10 } }>
                             <MeeraPortrait size={ 40 } />
-                            <div style={ { fontWeight: 800, fontSize: 14 } }>{ s.artisanName } · { s.artisanLocation }</div>
+                            <div style={ { fontWeight: 800, fontSize: 14 } }>Meera Devi · Jaipur, Rajasthan</div>
                         </div>
                         { isEditing ? (
                             <textarea className="inline-edit-textarea" value={ story } onChange={ e => setStory(e.target
                                     .value) } rows={ 6 } style={ { fontFamily: "'Fraunces',serif", fontStyle: "italic",
                                     fontSize: 15.5 } } />
                         ) : (
-                            <p className="serif" style={ { margin: 0, fontSize: 15.5, lineHeight: 1.7, fontStyle: "italic",
+                            <p className="seri" style={ { margin: 0, fontSize: 15.5, lineHeight: 1.7, fontStyle: "italic",
                                     color: "var(--bamboo-deep)" } }>{ story }</p>
                         ) }
                     </div>
@@ -2363,7 +2294,7 @@
                         time: "3 days"
                     });
                     setCosts({
-                        material: "₹450",
+                material: "₹450",
                         other: "₹100",
                         time: "3 days"
                     });
@@ -2376,7 +2307,7 @@
                     <Header title={ s.pricingTitle } sub={ s.pricingSub } onBack={ back } />
                     <div style={ { display: "flex", flexDirection: "column", gap: 14, marginBottom: 16 } }>
                         { [
-                            [s.materialCost, "material", costs.material],
+                        [s.materialCost, "material", costs.material],
                             [s.otherCosts, "other", costs.other],
                             [s.productionTime, "time", costs.time]
                         ].map(([label, key, val]) => (
@@ -2465,13 +2396,13 @@
                                             .value)) }
                                         style={ { width: 70, textAlign: "center", padding: "4px 6px", borderRadius: 8,
                                             border: "1.5px solid var(--gold)", fontSize: 13, background: "#FFFDF5" } } />
-                                    <span>– ₹</span>
+                                  <span>– ₹</span>
                                     <input type="number" value={ rangeHigh } onChange={ e => setRangeHigh(Number(e.target
                                             .value)) }
                                         style={ { width: 70, textAlign: "center", padding: "4px 6px", borderRadius: 8,
                                             border: "1.5px solid var(--gold)", fontSize: 13, background: "#FFFDF5" } } />
                                 </div>
-                            </div>
+                           iv>
                         ) : (
                             <>
                                 <div className="serif" style={ { fontSize: 40, fontWeight: 600,
@@ -2495,7 +2426,7 @@
                     <div style={ { display: "flex", flexDirection: "column", gap: 10 } }>
                         { isEditing ? (
                             <div style={ { display: "flex", gap: 10 } }>
-                                <button className="btn-primary" onClick={ handleSave } style={ { flex: 1 } }>{ s
+                              <button className="btn-primary" onClick={ handleSave } style={ { flex: 1 } }>{ s
                                         .savePrice }</button>
                                 <button className="btn-secondary" onClick={ () => setIsEditing(false) } style={ { flex: 1 } }>{ s
                                         .cancel }</button>
@@ -2576,7 +2507,7 @@
                             { fields.map(([label, key]) => (
                                 <div key={ key } style={ { display: "flex", justifyContent: "space-between", padding: "7px 0",
                                         borderTop: "1px solid var(--line)" } }>
-                                    <span style={ { fontSize: 12.5, color: "var(--ink-soft)", fontWeight: 700 } }>{ label }</span>
+                                    <span style={ { fontSize: 12.5, color: "var(--ink-soft) fontWeight: 700 } }>{ label }</span>
                                     { isEditing ? (
                                         <input type="text" value={ data[key] } onChange={ e => setData({ ...data, [key]: e
                                                 .target.value }) }
@@ -2633,17 +2564,10 @@
             );
         }
 
-        function Publishing({ go, back, onPublishDone }) {
+        function Publishing({ go, back }) {
             const s = useStrings();
             const steps = [s.step1, s.step2, s.step3, s.step4, s.step5, s.step6];
             const [done, setDone] = useState(false);
-
-            useEffect(() => {
-                if (done) {
-                    onPublishDone();
-                }
-            }, [done]);
-
             return (
                 <ScreenShell>
                     <Header title={ s.preparingListing } onBack={ back } />
@@ -2682,7 +2606,7 @@
                     </div>
                     <div className="serif" style={ { fontSize: 26, fontWeight: 600, color: "var(--bamboo-deep)",
                             marginBottom: 14 } }>₹{ product.suggestedPrice }</div>
-                    <div style={ { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginBottom: 20 } }>
+                    <div style { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginBottom: 20 } }>
                         { [
                             ["Stock", "12"],
                             ["Views", "0"],
@@ -2707,10 +2631,10 @@
                 <ScreenShell>
                     <Header title={ s.foundBuyers } sub={ s.foundBuyersSub } onBack={ back } />
                     <div style={ { display: "flex", flexDirection: "column", gap: 10, marginBottom: 16 } }>
-                        <BuyerCard name={ s.buyer1Name } match={ 94 } matchLabel={ s.buyer1Match } color="var(--bamboo)" onClick={ () =>
-                                go("buyerDetail") } />
-                        <BuyerCard name={ s.buyer2Name } match={ 88 } matchLabel={ s.buyer2Match } color="var(--clay)" />
-                        <BuyerCard name={ s.buyer3Name } match={ 84 } matchLabel={ s.buyer3Match } color="var(--teal)" />
+                        <BuyerCard name="Rajasthan Home Living" match={ 94 } color="var(--bamboo)" onClick={ () => go(
+                            "buyerDetail") } />
+                        <BuyerCard name="CraftRoots Store" match={ 88 } color="var(--clay)" />
+                        <BuyerCard name="Heritage Basket Co." match={ 84 } color="var(--teal)" />
                     </div>
                     <div className="card" style={ { marginBottom: 16 } }>
                         <div className="field-label">{ s.whyBuyer }</div>
@@ -2789,7 +2713,7 @@
             );
         }
 
-        // ---------- COPILOT ----------
+        // ---------- COPILOT WITH SIMULATED VOICE ----------
         function Copilot({ go, back }) {
             const s = useStrings();
             const [asked, setAsked] = useState(false);
@@ -2823,7 +2747,7 @@
                         reply = "Your bamboo basket is your best-selling product with 4 units sold this month.";
                     } else if (q.toLowerCase().includes("contact") || q.toLowerCase().includes("who")) {
                         reply = "You should contact Rajasthan Home Living – they showed strong interest.";
-                    } else if (q.toLowerCase().includes("improve") || q.toLowerCase().includes("sales")) {
+                    } else if (q.toLowerCase().includes("improve") |q.toLowerCase().includes("sales")) {
                         reply = "Consider offering a small discount on bulk orders or highlighting your craft story more.";
                     }
                     setResponse(reply);
@@ -2881,7 +2805,10 @@
         // ---------- SUMMARY ----------
         function Summary({ go, back }) {
             const s = useStrings();
-            const journey = s.journeySteps;
+            const journey = ["Handmade product", "Takes photo", "AI improves photo", "Speaks", "AI understands",
+                "AI creates catalog", "AI creates craft story", "AI suggests price", "Meera approves", "Product goes live",
+                "AI finds buyers", "Business grows"
+            ];
             return (
                 <ScreenShell>
                     <Header title="Journey Complete" onBack={ back } />
